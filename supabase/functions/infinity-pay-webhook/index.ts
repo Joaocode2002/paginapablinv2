@@ -38,6 +38,8 @@ serve(async (req) => {
               user_data: {
                 em: userData.email ? [await hashData(userData.email.toLowerCase().trim())] : [],
                 ph: userData.phone ? [await hashData(userData.phone.replace(/\D/g, ''))] : [],
+                fbc: payload.fbc || null,
+                fbp: payload.fbp || null,
                 client_ip_address: req.headers.get('x-real-ip') || req.headers.get('x-forwarded-for') || null,
                 client_user_agent: req.headers.get('user-agent') || null,
               },
