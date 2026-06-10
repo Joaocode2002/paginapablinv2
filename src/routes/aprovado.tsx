@@ -42,7 +42,7 @@ function Aprovado() {
   return (
     <div className="bg-black text-white selection:bg-[#22c55e] selection:text-black min-h-screen flex flex-col items-center justify-center p-4 overflow-x-hidden">
       <Helmet>
-        <title>Compra Aprovada</title>
+        <title>Pablog - Compra Aprovada</title>
       </Helmet>
       {/* Background Decorativo */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
