@@ -10,8 +10,9 @@ serve(async (req) => {
 
   try {
     const url = new URL(req.url);
-    const fbp = url.searchParams.get('fbp');
-    const fbc = url.searchParams.get('fbc');
+    const fbp = url.searchParams.get('fbp') || url.searchParams.get('utm_fbp');
+    const fbc = url.searchParams.get('fbc') || url.searchParams.get('utm_fbc') || url.searchParams.get('fbclid');
+
 
     const bodyText = await req.text()
     if (!bodyText) {
