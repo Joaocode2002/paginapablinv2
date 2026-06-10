@@ -58,7 +58,7 @@ function Aprovado() {
 
         {/* Título Principal */}
         <div className="space-y-2">
-          <h1 className="text-5xl md:text-7xl tracking-wider text-[#22c55e] uppercase font-black">
+          <h1 className="text-3xl md:text-5xl tracking-wider text-[#22c55e] uppercase font-black">
             Parabéns! Sua compra foi aprovada
           </h1>
         </div>
