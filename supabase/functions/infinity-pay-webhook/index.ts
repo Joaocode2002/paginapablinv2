@@ -2,6 +2,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
 const FB_PIXEL_ID = Deno.env.get("FB_PIXEL_ID")
 const FB_ACCESS_TOKEN = Deno.env.get("FB_ACCESS_TOKEN")
+const FB_TEST_EVENT_CODE = "TEST70290" // Código de teste fornecido pelo usuário
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -22,7 +23,6 @@ serve(async (req) => {
     if (isApproved) {
       const userData = payload.customer || {};
       
-      // Adicionando dados complementares para melhorar a combinação do Facebook
       const fbResponse = await fetch(`https://graph.facebook.com/v17.0/${FB_PIXEL_ID}/events`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -33,6 +33,8 @@ serve(async (req) => {
               event_time: Math.floor(Date.now() / 1000),
               action_source: 'website',
               event_source_url: 'https://pablinmetodos.com.br/aprovado',
+              // Adicionando o código de teste para aparecer em tempo real no Gerenciador
+              test_event_code: FB_TEST_EVENT_CODE,
               user_data: {
                 em: userData.email ? [await hashData(userData.email.toLowerCase().trim())] : [],
                 ph: userData.phone ? [await hashData(userData.phone.replace(/\D/g, ''))] : [],
@@ -51,7 +53,7 @@ serve(async (req) => {
       })
 
       const fbResult = await fbResponse.json()
-      console.log("Evento de compra enviado ao Facebook. Resposta:", JSON.stringify(fbResult))
+      console.log("Evento de compra enviado ao Facebook (Modo Teste). Resposta:", JSON.stringify(fbResult))
     }
 
     return new Response(JSON.stringify({ received: true }), {
