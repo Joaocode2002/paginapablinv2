@@ -51,8 +51,20 @@ function Promocopa() {
       const baseUrl = "https://checkout.infinitepay.io/edimarjose/HAROiEwmWj";
       const params = new URLSearchParams();
       
-      if (fbp) params.set('fbp', fbp);
-      if (fbc) params.set('fbc', fbc);
+      if (fbp) {
+        params.set('fbp', fbp);
+        params.set('utm_fbp', fbp);
+      }
+      if (fbc) {
+        params.set('fbc', fbc);
+        params.set('utm_fbc', fbc);
+        
+        // Se o fbc contém o fbclid (fb.1.timestamp.fbclid), extraímos apenas o fbclid
+        const fbclidMatch = fbc.match(/fb\.1\.\d+\.(.+)/);
+        if (fbclidMatch) {
+          params.set('fbclid', fbclidMatch[1]);
+        }
+      }
       
       const finalUrl = params.toString() ? `${baseUrl}?${params.toString()}` : baseUrl;
       window.location.href = finalUrl;
