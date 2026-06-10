@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as MetodosRouteImport } from './routes/metodos'
+import { Route as PromocaoRouteImport } from './routes/promocao'
+import { Route as AprovadoRouteImport } from './routes/aprovado'
 import { Route as IndexRouteImport } from './routes/index'
 
-const MetodosRoute = MetodosRouteImport.update({
-  id: '/metodos',
-  path: '/metodos',
+const PromocaoRoute = PromocaoRouteImport.update({
+  id: '/promocao',
+  path: '/promocao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AprovadoRoute = AprovadoRouteImport.update({
+  id: '/aprovado',
+  path: '/aprovado',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +31,48 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/metodos': typeof MetodosRoute
+  '/aprovado': typeof AprovadoRoute
+  '/promocao': typeof PromocaoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/metodos': typeof MetodosRoute
+  '/aprovado': typeof AprovadoRoute
+  '/promocao': typeof PromocaoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/metodos': typeof MetodosRoute
+  '/aprovado': typeof AprovadoRoute
+  '/promocao': typeof PromocaoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/metodos'
+  fullPaths: '/' | '/aprovado' | '/promocao'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/metodos'
-  id: '__root__' | '/' | '/metodos'
+  to: '/' | '/aprovado' | '/promocao'
+  id: '__root__' | '/' | '/aprovado' | '/promocao'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  MetodosRoute: typeof MetodosRoute
+  AprovadoRoute: typeof AprovadoRoute
+  PromocaoRoute: typeof PromocaoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/metodos': {
-      id: '/metodos'
-      path: '/metodos'
-      fullPath: '/metodos'
-      preLoaderRoute: typeof MetodosRouteImport
+    '/promocao': {
+      id: '/promocao'
+      path: '/promocao'
+      fullPath: '/promocao'
+      preLoaderRoute: typeof PromocaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aprovado': {
+      id: '/aprovado'
+      path: '/aprovado'
+      fullPath: '/aprovado'
+      preLoaderRoute: typeof AprovadoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +87,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  MetodosRoute: MetodosRoute,
+  AprovadoRoute: AprovadoRoute,
+  PromocaoRoute: PromocaoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
