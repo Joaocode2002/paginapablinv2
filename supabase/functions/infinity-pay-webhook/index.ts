@@ -17,13 +17,12 @@ serve(async (req) => {
     const payload = JSON.parse(bodyText)
     console.log("Webhook recebido da Infinity Pay:", JSON.stringify(payload))
 
-    // Verificamos se há um 'amount' positivo e se a transação tem um NSU ou status de paga
-    // O teste real mostrou que o payload do Pix/Link vem com amount e transaction_nsu
     const isApproved = payload.amount > 0 && (payload.transaction_nsu || payload.status === 'PAID' || payload.event === 'transaction.approved' || payload.capture_method === 'pix');
     
     if (isApproved) {
       const userData = payload.customer || {};
       
+      // Adicionando dados complementares para melhorar a combinação do Facebook
       const fbResponse = await fetch(`https://graph.facebook.com/v17.0/${FB_PIXEL_ID}/events`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -32,14 +31,18 @@ serve(async (req) => {
             {
               event_name: 'Purchase',
               event_time: Math.floor(Date.now() / 1000),
-              action_source: 'email',
+              action_source: 'website',
+              event_source_url: 'https://pablinmetodos.com.br/aprovado',
               user_data: {
-                em: userData.email ? [await hashData(userData.email.toLowerCase())] : [],
+                em: userData.email ? [await hashData(userData.email.toLowerCase().trim())] : [],
                 ph: userData.phone ? [await hashData(userData.phone.replace(/\D/g, ''))] : [],
+                client_ip_address: req.headers.get('x-real-ip') || req.headers.get('x-forwarded-for') || null,
+                client_user_agent: req.headers.get('user-agent') || null,
               },
               custom_data: {
                 currency: 'BRL',
                 value: Number((payload.amount / 100).toFixed(2)),
+                order_id: payload.transaction_nsu || payload.order_nsu,
               },
             },
           ],
