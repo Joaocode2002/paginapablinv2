@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { CheckCircle2, MessageCircle, Instagram } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 export const Route = createFileRoute("/aprovado")({
   component: Aprovado,
@@ -40,6 +41,9 @@ function Aprovado() {
 
   return (
     <div className="bg-black text-white selection:bg-[#22c55e] selection:text-black min-h-screen flex flex-col items-center justify-center p-4 overflow-x-hidden">
+      <Helmet>
+        <title>Compra Aprovada</title>
+      </Helmet>
       {/* Background Decorativo */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#22c55e]/10 blur-[120px] rounded-full" />
