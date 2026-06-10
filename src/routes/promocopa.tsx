@@ -29,7 +29,7 @@ function Promocopa() {
 
     setTimeout(() => {
       setLoading(false);
-      window.location.href = "https://checkout.infinitepay.io/edimarjose/1mXUm1AyCn";
+      window.location.href = "https://checkout.infinitepay.io/edimarjose/HAROiEwmWj";
     }, 1200);
   };
 
