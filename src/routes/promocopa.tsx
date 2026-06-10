@@ -21,26 +21,36 @@ function Promocopa() {
     e.preventDefault();
     setLoading(true);
 
-    // Track InitiateCheckout if fbq is defined
     const fbq = (window as any).fbq;
     let fbp = "";
     let fbc = "";
     
     if (typeof fbq === "function") {
       fbq("track", "InitiateCheckout");
-      // Tentar pegar os cookies do Facebook para enviar no link
-      try {
-        fbp = document.cookie.split('; ').find(row => row.startsWith('_fbp='))?.split('=')[1] || "";
-        fbc = document.cookie.split('; ').find(row => row.startsWith('_fbc='))?.split('=')[1] || "";
-      } catch (err) {
-        console.error("Erro ao ler cookies:", err);
+    }
+
+    // Tentar pegar fbp e fbc dos cookies e da URL
+    try {
+      fbp = document.cookie.split('; ').find(row => row.startsWith('_fbp='))?.split('=')[1] || "";
+      fbc = document.cookie.split('; ').find(row => row.startsWith('_fbc='))?.split('=')[1] || "";
+      
+      // Se não estiver no cookie (fbc), tenta pegar do parâmetro fbclid na URL
+      if (!fbc) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fbclid = urlParams.get('fbclid');
+        if (fbclid) {
+          fbc = `fb.1.${Date.now()}.${fbclid}`;
+        }
       }
+    } catch (err) {
+      console.error("Erro ao capturar dados de rastreamento:", err);
     }
 
     setTimeout(() => {
       setLoading(false);
       const baseUrl = "https://checkout.infinitepay.io/edimarjose/HAROiEwmWj";
       const params = new URLSearchParams();
+      
       if (fbp) params.set('fbp', fbp);
       if (fbc) params.set('fbc', fbc);
       
