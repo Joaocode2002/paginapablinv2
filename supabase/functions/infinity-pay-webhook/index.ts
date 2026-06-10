@@ -13,7 +13,6 @@ serve(async (req) => {
     const fbp = url.searchParams.get('fbp') || url.searchParams.get('utm_fbp');
     const fbc = url.searchParams.get('fbc') || url.searchParams.get('utm_fbc') || url.searchParams.get('fbclid');
 
-
     const bodyText = await req.text()
     if (!bodyText) {
       return new Response(JSON.stringify({ error: "Empty body" }), { status: 400 })
@@ -34,42 +33,49 @@ serve(async (req) => {
       );
     
     if (isApproved) {
-      const userData = payload.customer || {};
-      
-      const fbResponse = await fetch(`https://graph.facebook.com/v17.0/${FB_PIXEL_ID}/events`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          data: [
-            {
-              event_name: 'Purchase',
-              event_time: Math.floor(Date.now() / 1000),
-              action_source: 'website',
-              event_source_url: 'https://pablinmetodos.com.br/aprovado',
-              user_data: {
-                em: userData.email ? [await hashData(userData.email.toLowerCase().trim())] : [],
-                ph: userData.phone ? [await hashData(userData.phone.replace(/\D/g, ''))] : [],
-                fbc: fbc || payload.fbc || null,
-                fbp: fbp || payload.fbp || null,
-                client_ip_address: req.headers.get('x-real-ip') || req.headers.get('x-forwarded-for') || null,
-                client_user_agent: req.headers.get('user-agent') || null,
-              },
-              custom_data: {
-                currency: 'BRL',
-                value: Number(((payload.paid_amount || payload.amount) / 100).toFixed(2)),
-                order_id: payload.transaction_nsu || payload.order_nsu || payload.slug,
-              },
-            },
-          ],
-          test_event_code: 'TEST70290',
-          access_token: FB_ACCESS_TOKEN,
-        }),
-      })
+      // Processar em segundo plano sem esperar a resposta do Facebook para liberar o cliente
+      (async () => {
+        try {
+          const userData = payload.customer || {};
+          const fbResponse = await fetch(`https://graph.facebook.com/v17.0/${FB_PIXEL_ID}/events`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              data: [
+                {
+                  event_name: 'Purchase',
+                  event_time: Math.floor(Date.now() / 1000),
+                  action_source: 'website',
+                  event_source_url: 'https://pablinmetodos.com.br/aprovado',
+                  user_data: {
+                    em: userData.email ? [await hashData(userData.email.toLowerCase().trim())] : [],
+                    ph: userData.phone ? [await hashData(userData.phone.replace(/\D/g, ''))] : [],
+                    fbc: fbc || payload.fbc || null,
+                    fbp: fbp || payload.fbp || null,
+                    client_ip_address: req.headers.get('x-real-ip') || req.headers.get('x-forwarded-for') || null,
+                    client_user_agent: req.headers.get('user-agent') || null,
+                  },
+                  custom_data: {
+                    currency: 'BRL',
+                    value: Number(((payload.paid_amount || payload.amount) / 100).toFixed(2)),
+                    order_id: payload.transaction_nsu || payload.order_nsu || payload.slug,
+                  },
+                },
+              ],
+              test_event_code: 'TEST70290',
+              access_token: FB_ACCESS_TOKEN,
+            }),
+          })
 
-      const fbResult = await fbResponse.json()
-      console.log("Evento de compra enviado ao Facebook. Resposta:", JSON.stringify(fbResult))
+          const fbResult = await fbResponse.json()
+          console.log("Evento de compra enviado ao Facebook em background. Resposta:", JSON.stringify(fbResult))
+        } catch (fbError) {
+          console.error("Erro ao enviar para o Facebook em background:", fbError)
+        }
+      })();
     }
 
+    // Retorna imediatamente para a InfinitePay
     return new Response(JSON.stringify({ received: true }), {
       headers: { "Content-Type": "application/json" },
       status: 200,
