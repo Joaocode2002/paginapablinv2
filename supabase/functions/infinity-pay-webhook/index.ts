@@ -18,7 +18,18 @@ serve(async (req) => {
     const payload = JSON.parse(bodyText)
     console.log("Webhook recebido da Infinity Pay:", JSON.stringify(payload))
 
-    const isApproved = payload.amount > 0 && (payload.transaction_nsu || payload.status === 'PAID' || payload.event === 'transaction.approved' || payload.capture_method === 'pix');
+    // Validando se o pagamento foi aprovado de acordo com a documentação e logs
+    // A documentação cita 'paid_amount' e 'transaction_nsu' para transações confirmadas
+    const isApproved = 
+      (payload.amount > 0 || payload.paid_amount > 0) && 
+      (
+        payload.transaction_nsu || 
+        payload.status === 'PAID' || 
+        payload.status === 'approved' ||
+        payload.event === 'transaction.approved' || 
+        payload.capture_method === 'pix' ||
+        payload.paid === true
+      );
     
     if (isApproved) {
       const userData = payload.customer || {};
@@ -43,8 +54,8 @@ serve(async (req) => {
               },
               custom_data: {
                 currency: 'BRL',
-                value: Number((payload.amount / 100).toFixed(2)),
-                order_id: payload.transaction_nsu || payload.order_nsu,
+                value: Number(((payload.paid_amount || payload.amount) / 100).toFixed(2)),
+                order_id: payload.transaction_nsu || payload.order_nsu || payload.slug,
               },
             },
           ],
