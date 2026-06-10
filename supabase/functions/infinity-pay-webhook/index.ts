@@ -4,7 +4,6 @@ const FB_PIXEL_ID = Deno.env.get("FB_PIXEL_ID")
 const FB_ACCESS_TOKEN = Deno.env.get("FB_ACCESS_TOKEN")
 
 serve(async (req) => {
-  // Configuração de CORS
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: { 'Access-Control-Allow-Origin': '*' } })
   }
@@ -14,18 +13,17 @@ serve(async (req) => {
     if (!bodyText) {
       return new Response(JSON.stringify({ error: "Empty body" }), { status: 400 })
     }
+    
     const payload = JSON.parse(bodyText)
     console.log("Webhook recebido da Infinity Pay:", JSON.stringify(payload))
 
-    // A Infinity Pay geralmente envia o status da transação
-    // Ajuste aqui conforme o formato real do payload da Infinity Pay
-    const isApproved = payload.status === 'approved' || payload.event === 'transaction.approved' || payload.status === 'PAID'
-
+    // Verificamos se há um 'amount' positivo e se a transação tem um NSU ou status de paga
+    // O teste real mostrou que o payload do Pix/Link vem com amount e transaction_nsu
+    const isApproved = payload.amount > 0 && (payload.transaction_nsu || payload.status === 'PAID' || payload.event === 'transaction.approved' || payload.capture_method === 'pix');
     
     if (isApproved) {
-      const userData = payload.customer || {}
+      const userData = payload.customer || {};
       
-      // Enviando para a API de Conversões do Facebook
       const fbResponse = await fetch(`https://graph.facebook.com/v17.0/${FB_PIXEL_ID}/events`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -41,7 +39,7 @@ serve(async (req) => {
               },
               custom_data: {
                 currency: 'BRL',
-                value: Number((payload.amount / 100).toFixed(2)), // Converte centavos para reais mantendo as duas casas decimais
+                value: Number((payload.amount / 100).toFixed(2)),
               },
             },
           ],
@@ -50,7 +48,7 @@ serve(async (req) => {
       })
 
       const fbResult = await fbResponse.json()
-      console.log("Resposta do Facebook:", JSON.stringify(fbResult))
+      console.log("Evento de compra enviado ao Facebook. Resposta:", JSON.stringify(fbResult))
     }
 
     return new Response(JSON.stringify({ received: true }), {
