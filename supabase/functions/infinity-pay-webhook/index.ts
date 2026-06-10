@@ -10,12 +10,17 @@ serve(async (req) => {
   }
 
   try {
-    const payload = await req.json()
+    const bodyText = await req.text()
+    if (!bodyText) {
+      return new Response(JSON.stringify({ error: "Empty body" }), { status: 400 })
+    }
+    const payload = JSON.parse(bodyText)
     console.log("Webhook recebido da Infinity Pay:", JSON.stringify(payload))
 
     // A Infinity Pay geralmente envia o status da transação
     // Ajuste aqui conforme o formato real do payload da Infinity Pay
-    const isApproved = payload.status === 'approved' || payload.event === 'transaction.approved'
+    const isApproved = payload.status === 'approved' || payload.event === 'transaction.approved' || payload.status === 'PAID'
+
     
     if (isApproved) {
       const userData = payload.customer || {}
