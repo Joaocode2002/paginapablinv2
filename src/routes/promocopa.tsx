@@ -21,13 +21,6 @@ function Promocopa() {
     e.preventDefault();
     setLoading(true);
 
-    const fbq = (window as any).fbq;
-    let fbp = "";
-    let fbc = "";
-    
-    if (typeof fbq === "function") {
-      fbq("track", "InitiateCheckout");
-    }
 
     // Tentar pegar fbp e fbc dos cookies e da URL
     try {

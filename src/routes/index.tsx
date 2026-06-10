@@ -22,11 +22,6 @@ function Index() {
     e.preventDefault();
     setLoading(true);
 
-    // Track Lead if fbq is defined and on the correct domain
-    const fbq = (window as any).fbq;
-    if (typeof fbq === "function" && window.location.hostname === 'pablinmetodos.com.br') {
-      fbq("track", "Lead");
-    }
 
     setTimeout(() => {
       window.location.href = WHATSAPP_LINK;
