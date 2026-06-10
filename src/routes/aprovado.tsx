@@ -9,7 +9,21 @@ export const Route = createFileRoute("/aprovado")({
 
 function Aprovado() {
   useEffect(() => {
-    // Pixels removidos conforme solicitado
+    // Corrigir a URL malformada enviada pela InfinitePay (com múltiplos ?)
+    const currentUrl = window.location.href;
+    if (currentUrl.includes('?') && (currentUrl.match(/\?/g) || []).length > 1) {
+      console.log("Corrigindo URL malformada...");
+      
+      // Substituir todos os '?' após o primeiro por '&'
+      const firstQuestionMarkIndex = currentUrl.indexOf('?');
+      const baseUrl = currentUrl.substring(0, firstQuestionMarkIndex + 1);
+      const queryString = currentUrl.substring(firstQuestionMarkIndex + 1).replace(/\?/g, '&');
+      
+      const newUrl = baseUrl + queryString;
+      
+      // Atualizar a URL sem recarregar a página para o usuário não perceber
+      window.history.replaceState({}, '', newUrl);
+    }
   }, []);
 
   const handleWppClick = () => {
