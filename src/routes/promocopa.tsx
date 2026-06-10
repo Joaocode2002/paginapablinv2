@@ -21,6 +21,8 @@ function Promocopa() {
     e.preventDefault();
     setLoading(true);
 
+    let fbp = "";
+    let fbc = "";
 
     // Tentar pegar fbp e fbc dos cookies e da URL
     try {
