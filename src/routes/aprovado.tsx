@@ -9,29 +9,7 @@ export const Route = createFileRoute("/aprovado")({
 
 function Aprovado() {
   useEffect(() => {
-    // 1. Script do Facebook Pixel (Configuração)
-    const fbScript = document.createElement("script");
-    fbScript.innerHTML = `
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      
-      fbq('init', '1906227756853653');
-      fbq('track', 'PageView');
-      fbq('track', 'Purchase', { value: 97.99, currency: 'BRL' });
-    `;
-    document.head.appendChild(fbScript);
-
-    // 2. Dispara o evento de Purchase via JS (Garantia de carregamento)
-    const fbq = (window as any).fbq;
-    if (typeof fbq === "function") {
-      fbq("track", "Purchase", { value: 97.99, currency: "BRL" });
-    }
+    // Pixels removidos conforme solicitado
   }, []);
 
   const handleWppClick = () => {
