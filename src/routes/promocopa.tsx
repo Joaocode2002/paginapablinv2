@@ -21,6 +21,11 @@ function Promocopa() {
     e.preventDefault();
     setLoading(true);
 
+    const fbq = (window as any).fbq;
+    if (typeof fbq === "function") {
+      fbq("track", "InitiateCheckout");
+    }
+
     let fbp = "";
     let fbc = "";
 
