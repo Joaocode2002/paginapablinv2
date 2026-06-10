@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/promocao")({
-  component: Promocao,
+export const Route = createFileRoute("/promocopa")({
+  component: Promocopa,
 });
 
-function Promocao() {
+function Promocopa() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-black text-white p-4">
-      <h1 className="text-4xl font-bold text-brand-green mb-4 font-bebas tracking-wider">PROMOÇÃO EXCLUSIVA</h1>
+      <h1 className="text-4xl font-bold text-brand-green mb-4 font-bebas tracking-wider">PROMOCOPA EXCLUSIVA</h1>
       <p className="text-lg text-center max-w-md font-montserrat text-white/90">
         Aproveite as condições especiais por tempo limitado.
       </p>
