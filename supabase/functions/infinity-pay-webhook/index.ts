@@ -36,7 +36,7 @@ serve(async (req) => {
               },
               custom_data: {
                 currency: 'BRL',
-                value: payload.amount / 100, // Infinity Pay costuma enviar em centavos
+                value: Number((payload.amount / 100).toFixed(2)), // Converte centavos para reais mantendo as duas casas decimais
               },
             },
           ],
