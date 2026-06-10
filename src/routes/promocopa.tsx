@@ -144,7 +144,14 @@ function Promocopa() {
 
   const MAX_RESULTS = 50;
   const results: string[] = Array.from({ length: MAX_RESULTS }, (_, i) => `/resultados/${i + 1}.png`);
-  const carouselItems = [...results, ...results, ...results];
+  
+  // Randomize the results array using useMemo or similar isn't strictly necessary since we want it "random on each load"
+  // but let's do it in a way that doesn't trigger infinite re-renders.
+  const [shuffledResults] = useState(() => {
+    return [...results].sort(() => Math.random() - 0.5);
+  });
+
+  const carouselItems = [...shuffledResults, ...shuffledResults, ...shuffledResults];
 
   return (
     <div className="bg-black text-white selection:bg-brand-green selection:text-black">

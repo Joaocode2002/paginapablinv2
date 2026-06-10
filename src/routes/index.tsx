@@ -150,8 +150,12 @@ function Index() {
   const MAX_RESULTS = 50;
   const results: string[] = Array.from({ length: MAX_RESULTS }, (_, i) => `/resultados/${i + 1}.png`);
 
+  const [shuffledResults] = useState(() => {
+    return [...results].sort(() => Math.random() - 0.5);
+  });
+
   // Triplicar para o loop infinito suave
-  const carouselItems = [...results, ...results, ...results];
+  const carouselItems = [...shuffledResults, ...shuffledResults, ...shuffledResults];
 
   return (
     <div className="bg-black text-white selection:bg-brand-green selection:text-black">
