@@ -23,13 +23,29 @@ function Promocopa() {
 
     // Track InitiateCheckout if fbq is defined
     const fbq = (window as any).fbq;
+    let fbp = "";
+    let fbc = "";
+    
     if (typeof fbq === "function") {
       fbq("track", "InitiateCheckout");
+      // Tentar pegar os cookies do Facebook para enviar no link
+      try {
+        fbp = document.cookie.split('; ').find(row => row.startsWith('_fbp='))?.split('=')[1] || "";
+        fbc = document.cookie.split('; ').find(row => row.startsWith('_fbc='))?.split('=')[1] || "";
+      } catch (err) {
+        console.error("Erro ao ler cookies:", err);
+      }
     }
 
     setTimeout(() => {
       setLoading(false);
-      window.location.href = "https://checkout.infinitepay.io/edimarjose/HAROiEwmWj";
+      const baseUrl = "https://checkout.infinitepay.io/edimarjose/HAROiEwmWj";
+      const params = new URLSearchParams();
+      if (fbp) params.set('fbp', fbp);
+      if (fbc) params.set('fbc', fbc);
+      
+      const finalUrl = params.toString() ? `${baseUrl}?${params.toString()}` : baseUrl;
+      window.location.href = finalUrl;
     }, 1200);
   };
 
