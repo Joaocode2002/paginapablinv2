@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
 import { Play, Pause, Volume2, VolumeX, AlertTriangle } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 export const Route = createFileRoute("/promocopa")({
   component: Promocopa,
@@ -147,6 +148,9 @@ function Promocopa() {
 
   return (
     <div className="bg-black text-white selection:bg-brand-green selection:text-black">
+      <Helmet>
+        <title>PromoCopa</title>
+      </Helmet>
       <header className="fixed top-0 left-0 z-50 flex w-full items-center justify-center border-b border-white/10 bg-[#0f7a2e] px-4 py-3 text-center text-xs font-bold tracking-wide text-white">
         <span>ESTE SITE PODE CAIR A QUALQUER MOMENTO</span>
         <AlertTriangle className="ml-2 h-4 w-4 text-yellow-400 stroke-[3px]" />
