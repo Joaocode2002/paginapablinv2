@@ -59,6 +59,7 @@ serve(async (req) => {
               },
             },
           ],
+          test_event_code: 'TEST70290',
           access_token: FB_ACCESS_TOKEN,
         }),
       })
