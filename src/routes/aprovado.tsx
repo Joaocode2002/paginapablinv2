@@ -13,8 +13,8 @@ function Aprovado() {
   }, []);
 
   const handleWppClick = () => {
-    // Substitua pelo seu número de WhatsApp real
-    window.location.href = "https://wa.me/5500000000000?text=Olá,%20acabei%20de%20comprar%20o%20método%20e%20gostaria%20de%20acesso.";
+    const message = encodeURIComponent("Quero receber meu acesso ao grupo vip!\n\nNome :");
+    window.location.href = `https://wa.me/5531991950946?text=${message}`;
   };
 
   return (
