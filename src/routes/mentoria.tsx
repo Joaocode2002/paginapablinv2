@@ -15,7 +15,7 @@ function Mentoria() {
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  
 
   const handleCheckoutClick = (e: React.MouseEvent) => {
     e.preventDefault();
