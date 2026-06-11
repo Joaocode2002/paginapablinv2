@@ -7,7 +7,7 @@ export const Route = createFileRoute("/mentoria")({
   component: Mentoria,
 });
 
-function VideoPlayer({ src, autoStart = false }: { src: string; autoStart?: boolean }) {
+function VideoPlayer({ src }: { src: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoStarted, setVideoStarted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
