@@ -168,7 +168,7 @@ function Mentoria() {
   return (
     <div className="bg-black text-white selection:bg-brand-green selection:text-black">
       <Helmet>
-        <title>Pablog - Mentoria CPA</title>
+        <title>Mentoria CPA</title>
       </Helmet>
       
       <main className="relative flex min-h-screen flex-col items-center justify-start overflow-hidden pt-10 pb-20">
@@ -183,10 +183,6 @@ function Mentoria() {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/70" />
 
         <div className="relative z-10 flex w-full max-w-5xl flex-col items-center px-4 text-center">
-          <h2 className="mb-4 font-bebas text-4xl italic tracking-[0.2em]">
-            PABLO<span className="text-brand-green">G</span>
-          </h2>
-
           <h1 className="font-bebas text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.92] tracking-wider text-brand-green uppercase">
             Mentoria CPA
           </h1>
