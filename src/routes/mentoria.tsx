@@ -201,13 +201,13 @@ function Mentoria() {
 
           <section className="mt-8 w-full flex flex-col gap-10 max-w-4xl mx-auto">
             {[
-              { n: 2, title: "Como funciona a plataforma" },
-              { n: 3, title: "Como funciona a operação" },
-              { n: 4, title: "Como acessar pelo telefone" },
-            ].map(({ n, title }) => (
+              { n: 2, title: "Como funciona a plataforma", src: "/mentoria2.mp4" },
+              { n: 3, title: "Como funciona a operação", src: "https://res.cloudinary.com/dvqmvjjd4/video/upload/mentoria3_kbpemr.mp4" },
+              { n: 4, title: "Como acessar pelo telefone", src: "/mentoria4.mp4" },
+            ].map(({ n, title, src }) => (
               <div key={n} className="w-full text-center">
                 <h3 className="mb-4 font-bebas text-2xl md:text-3xl tracking-widest text-brand-green uppercase">{title}</h3>
-                <VideoPlayer src={`/mentoria${n}.mp4`} />
+                <VideoPlayer src={src} />
               </div>
             ))}
           </section>
