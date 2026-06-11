@@ -240,7 +240,7 @@ function Mentoria() {
                   preload="metadata"
                   poster="/video-poster.png"
                 >
-                  <source src={`/video${n}.mp4`} type="video/mp4" />
+                  <source src={`/mentoria${n}.mp4`} type="video/mp4" />
                 </video>
               </div>
             ))}
