@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
-import { Play, Pause, Volume2, VolumeX, AlertTriangle, Users, Target, Trophy, CheckCircle2 } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 export const Route = createFileRoute("/mentoria")({
@@ -15,7 +15,6 @@ function Mentoria() {
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-  
 
   const handleCheckoutClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -46,7 +45,6 @@ function Mentoria() {
 
     setTimeout(() => {
       setLoading(false);
-      // Link de Checkout da Mentoria (ajuste conforme necessário)
       const baseUrl = "https://checkout.infinitepay.io/edimarjose/HAROiEwmWj";
       const params = new URLSearchParams();
       
@@ -161,9 +159,6 @@ function Mentoria() {
     };
   }, []);
 
-
-
-
   return (
     <div className="bg-black text-white selection:bg-brand-green selection:text-black">
       <Helmet>
@@ -191,12 +186,9 @@ function Mentoria() {
             PABLO<span className="text-brand-green">G</span>
           </h2>
 
-          <div className="flex flex-col items-center gap-2">
-            <span className="font-bebas text-2xl tracking-[0.3em] text-white/80 uppercase">Acesso Exclusivo</span>
-            <h1 className="font-bebas text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.92] tracking-wider text-brand-green uppercase">
-              Mentoria CPA
-            </h1>
-          </div>
+          <h1 className="font-bebas text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.92] tracking-wider text-brand-green uppercase">
+            Mentoria CPA
+          </h1>
 
           <p className="mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-white/90">
             Chegou a hora de parar de tentar sozinho e seguir o caminho trilhado por quem já chegou lá.
@@ -252,7 +244,6 @@ function Mentoria() {
             </div>
           </section>
 
-
           <div className="mt-16 w-full max-w-md flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
             <h3 className="mb-6 font-bebas text-2xl tracking-widest text-white uppercase">O que você vai receber:</h3>
             <ul className="mb-8 flex flex-col gap-4 text-left w-full">
@@ -273,7 +264,6 @@ function Mentoria() {
                 <span>Planilhas de gestão de banca</span>
               </li>
             </ul>
-
           </div>
 
           <button 
@@ -295,8 +285,6 @@ function Mentoria() {
               )}
             </span>
           </button>
-
-          
         </div>
       </main>
       
