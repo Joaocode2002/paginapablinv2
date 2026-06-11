@@ -123,7 +123,7 @@ function VideoPlayer({ src }: { src: string }) {
         <source src={`${src}#t=0.1`} type="video/mp4" />
       </video>
 
-      <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-2 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:p-6">
+      <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-2 bg-gradient-to-t from-black/90 to-transparent p-4 transition-opacity duration-300 md:p-6 md:opacity-0 md:group-hover:opacity-100">
         <input
           type="range" min="0" max="100" value={progress}
           onChange={handleProgressChange}
