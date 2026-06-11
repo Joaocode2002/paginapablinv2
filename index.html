@@ -31,20 +31,20 @@
       'https://connect.facebook.net/en_US/fbevents.js');
       
       // Só executa o pixel se estiver no domínio correto e NÃO estiver na página de aprovado
-      if (window.location.hostname === 'pablinmetodos.com.br' && !window.location.pathname.includes('/aprovado')) {
+      if (window.location.hostname === 'pablinmetodos.com.br' && !window.location.pathname.includes('/aprovado') && !window.location.pathname.includes('/mentoria')) {
         fbq('init', '1906227756853653');
         fbq('track', 'PageView');
       }
     </script>
     <noscript>
       <script>
-        if (window.location.hostname === 'pablinmetodos.com.br' && !window.location.pathname.includes('/aprovado')) {
+        if (window.location.hostname === 'pablinmetodos.com.br' && !window.location.pathname.includes('/aprovado') && !window.location.pathname.includes('/mentoria')) {
           document.write('<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1906227756853653&ev=PageView&noscript=1" />');
         }
       </script>
     </noscript>
     <!-- End Meta Pixel Code -->
-    <script type="module" crossorigin src="/assets/index-0Z4Htt1g.js"></script>
+    <script type="module" crossorigin src="/assets/index-BT2BpOcD.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-B1Qi6VgU.css">
   </head>
   <body>
