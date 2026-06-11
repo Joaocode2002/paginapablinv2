@@ -245,27 +245,6 @@ function Mentoria() {
           </section>
 
 
-          <div className="mt-16 w-full max-w-md flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
-            <h3 className="mb-6 font-bebas text-2xl tracking-widest text-white uppercase">O que você vai receber:</h3>
-            <ul className="mb-8 flex flex-col gap-4 text-left w-full">
-              <li className="flex items-center gap-3 font-montserrat text-sm text-white/90">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-brand-green" />
-                <span>Acesso vitalício ao conteúdo base</span>
-              </li>
-              <li className="flex items-center gap-3 font-montserrat text-sm text-white/90">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-brand-green" />
-                <span>Lives semanais de acompanhamento</span>
-              </li>
-              <li className="flex items-center gap-3 font-montserrat text-sm text-white/90">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-brand-green" />
-                <span>Grupo de networking no Telegram</span>
-              </li>
-              <li className="flex items-center gap-3 font-montserrat text-sm text-white/90">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-brand-green" />
-                <span>Planilhas de gestão de banca</span>
-              </li>
-            </ul>
-          </div>
 
           <button 
             onClick={handleCheckoutClick}
