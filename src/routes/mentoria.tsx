@@ -211,17 +211,7 @@ function Mentoria() {
             ].map(({ n, title }) => (
               <div key={n} className="w-full text-center">
                 <h3 className="mb-4 font-bebas text-2xl md:text-3xl tracking-widest text-brand-green uppercase">{title}</h3>
-                <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-xl">
-                  <video
-                    className="h-full w-full object-cover"
-                    playsInline
-                    controls
-                    preload="metadata"
-                    poster="/video-poster.png"
-                  >
-                    <source src={`/mentoria${n}.mp4`} type="video/mp4" />
-                  </video>
-                </div>
+                <VideoPlayer src={`/mentoria${n}.mp4`} />
               </div>
             ))}
           </section>
