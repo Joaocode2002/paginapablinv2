@@ -180,7 +180,9 @@ function Mentoria() {
           <h1 className="font-bebas text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.92] tracking-wider text-brand-green uppercase">
             Mentoria CPA
           </h1>
-
+          <p className="mt-6 max-w-2xl mx-auto font-montserrat text-lg leading-relaxed text-white/90">
+            Comece a escalar sua operação de <strong className="text-brand-green">CPA</strong> com uma plataforma de grandes players e intuitiva. Abaixo segue o tutorial de como começar.
+          </p>
 
           <section className="mt-16 w-full text-center">
             <div className="group relative aspect-video w-full max-w-4xl mx-auto overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
