@@ -48,7 +48,7 @@ function Promocopa() {
 
     setTimeout(() => {
       setLoading(false);
-      const baseUrl = "https://checkout.infinitepay.io/edimarjose/HAROiEwmWj";
+      const baseUrl = "https://checkout.infinitepay.io/edimarjose/1mXUm1AyCn";
       const params = new URLSearchParams();
       
       if (fbp) {
