@@ -75,9 +75,9 @@ function VideoPlayer({ src, autoStart = false }: { src: string; autoStart?: bool
         ref={videoRef}
         className="h-full w-full object-cover"
         playsInline
-        poster="/video-poster.png"
+        preload="metadata"
       >
-        <source src={src} type="video/mp4" />
+        <source src={`${src}#t=0.1`} type="video/mp4" />
       </video>
 
       <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:p-6">
