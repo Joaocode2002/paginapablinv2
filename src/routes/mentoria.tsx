@@ -15,7 +15,16 @@ function VideoPlayer({ src }: { src: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0);
+
+  const formatTime = (s: number) => {
+    if (!isFinite(s) || s < 0) return "0:00";
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, "0")}`;
+  };
 
   const togglePlay = () => {
     const v = videoRef.current;
@@ -76,7 +85,9 @@ function VideoPlayer({ src }: { src: string }) {
     if (!video) return;
     const updateProgress = () => {
       setProgress((video.currentTime / video.duration) * 100);
+      setCurrentTime(video.currentTime);
     };
+    const updateDuration = () => setDuration(video.duration);
     const handlePlay = () => {
       activeVideos.forEach((v) => { if (v !== video) v.pause(); });
       activeVideos.add(video);
@@ -85,11 +96,15 @@ function VideoPlayer({ src }: { src: string }) {
     const handlePause = () => { setIsPlaying(false); };
     const handleEnded = () => { activeVideos.delete(video); setIsPlaying(false); };
     video.addEventListener("timeupdate", updateProgress);
+    video.addEventListener("loadedmetadata", updateDuration);
+    video.addEventListener("durationchange", updateDuration);
     video.addEventListener("play", handlePlay);
     video.addEventListener("pause", handlePause);
     video.addEventListener("ended", handleEnded);
     return () => {
       video.removeEventListener("timeupdate", updateProgress);
+      video.removeEventListener("loadedmetadata", updateDuration);
+      video.removeEventListener("durationchange", updateDuration);
       video.removeEventListener("play", handlePlay);
       video.removeEventListener("pause", handlePause);
       video.removeEventListener("ended", handleEnded);
@@ -108,7 +123,7 @@ function VideoPlayer({ src }: { src: string }) {
         <source src={`${src}#t=0.1`} type="video/mp4" />
       </video>
 
-      <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:p-6">
+      <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-2 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:p-6">
         <input
           type="range" min="0" max="100" value={progress}
           onChange={handleProgressChange}
@@ -129,6 +144,9 @@ function VideoPlayer({ src }: { src: string }) {
                 className="h-1 w-20 cursor-pointer appearance-none rounded-lg bg-white/30 accent-brand-green"
               />
             </div>
+            <span className="font-mono text-xs text-white/90 tabular-nums">
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </span>
           </div>
           <button onClick={toggleFullscreen} className="text-white hover:text-brand-green">
             <Maximize className="h-6 w-6" />
