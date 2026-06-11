@@ -191,8 +191,6 @@ function Mentoria() {
             PABLO<span className="text-brand-green">G</span>
           </h2>
 
-          <div className="flex flex-col items-center gap-2">
-            <span className="font-bebas text-2xl tracking-[0.3em] text-white/80 uppercase">Acesso Exclusivo</span>
             <h1 className="font-bebas text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.92] tracking-wider text-brand-green uppercase">
               Mentoria CPA
             </h1>
