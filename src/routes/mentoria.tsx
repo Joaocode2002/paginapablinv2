@@ -185,6 +185,7 @@ function Mentoria() {
           </p>
 
           <section className="mt-16 w-full text-center">
+            <h3 className="mb-4 font-bebas text-2xl md:text-3xl tracking-widest text-brand-green uppercase">Criando sua conta na plataforma</h3>
             <div className="group relative aspect-video w-full max-w-4xl mx-auto overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
               <video 
                 ref={videoRef}
