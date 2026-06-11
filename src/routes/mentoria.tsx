@@ -192,7 +192,7 @@ function Mentoria() {
                 playsInline
                 poster="/video-poster.png"
               >
-                <source src="/video1.mp4" type="video/mp4" />
+                <source src="/mentoria1.mp4" type="video/mp4" />
               </video>
 
               <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:p-6">
@@ -240,7 +240,7 @@ function Mentoria() {
                   preload="metadata"
                   poster="/video-poster.png"
                 >
-                  <source src={`/video${n}.mp4`} type="video/mp4" />
+                  <source src={`/mentoria${n}.mp4`} type="video/mp4" />
                 </video>
               </div>
             ))}
