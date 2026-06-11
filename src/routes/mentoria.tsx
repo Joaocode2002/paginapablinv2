@@ -178,14 +178,6 @@ function Mentoria() {
     return () => cancelAnimationFrame(animationId);
   }, []);
 
-  const MAX_RESULTS = 50;
-  const results: string[] = Array.from({ length: MAX_RESULTS }, (_, i) => `/resultados/${i + 1}.png`);
-  
-  const [shuffledResults] = useState(() => {
-    return [...results].sort(() => Math.random() - 0.5);
-  });
-
-  const carouselItems = [...shuffledResults, ...shuffledResults, ...shuffledResults];
 
   const features = [
     {
