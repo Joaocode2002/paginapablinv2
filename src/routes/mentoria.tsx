@@ -154,8 +154,11 @@ function VideoPlayer({ src }: { src: string }) {
         </div>
       </div>
 
-      {!videoStarted && (
-        <button onClick={startVideo} className="absolute inset-0 z-20 flex items-center justify-center bg-black/20">
+      {(!videoStarted || !isPlaying) && (
+        <button 
+          onClick={!videoStarted ? startVideo : togglePlay} 
+          className="absolute inset-0 z-20 flex items-center justify-center bg-black/20 transition-colors hover:bg-black/30"
+        >
           <div className="flex items-center justify-center rounded-full bg-brand-green/90 p-6 text-black shadow-lg transition-transform hover:scale-110">
             <Play className="h-10 w-10 fill-current" />
           </div>
