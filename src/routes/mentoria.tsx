@@ -193,9 +193,6 @@ function Mentoria() {
                 ref={videoRef}
                 className="h-full w-full object-cover"
                 playsInline
-                autoPlay
-                muted
-                loop
                 poster="/video-poster.png"
               >
                 <source src="/video1.mp4" type="video/mp4" />
