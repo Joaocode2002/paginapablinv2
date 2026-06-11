@@ -63,8 +63,24 @@ function VideoPlayer({ src }: { src: string }) {
     const updateProgress = () => {
       setProgress((video.currentTime / video.duration) * 100);
     };
+    const handlePlay = () => {
+      activeVideos.forEach((v) => { if (v !== video) v.pause(); });
+      activeVideos.add(video);
+      setIsPlaying(true);
+    };
+    const handlePause = () => { setIsPlaying(false); };
+    const handleEnded = () => { activeVideos.delete(video); setIsPlaying(false); };
     video.addEventListener("timeupdate", updateProgress);
-    return () => { video.removeEventListener("timeupdate", updateProgress); };
+    video.addEventListener("play", handlePlay);
+    video.addEventListener("pause", handlePause);
+    video.addEventListener("ended", handleEnded);
+    return () => {
+      video.removeEventListener("timeupdate", updateProgress);
+      video.removeEventListener("play", handlePlay);
+      video.removeEventListener("pause", handlePause);
+      video.removeEventListener("ended", handleEnded);
+      activeVideos.delete(video);
+    };
   }, []);
 
   return (
