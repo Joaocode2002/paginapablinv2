@@ -250,6 +250,8 @@ function Mentoria() {
                 </video>
               </div>
             ))}
+          </section>
+
 
           <div className="mt-16 w-full max-w-md flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
             <h3 className="mb-6 font-bebas text-2xl tracking-widest text-white uppercase">O que você vai receber:</h3>
