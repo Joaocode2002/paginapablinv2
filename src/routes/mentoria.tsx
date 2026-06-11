@@ -297,9 +297,6 @@ function Mentoria() {
           </button>
 
           
-          <p className="mt-4 text-center uppercase font-montserrat font-bold tracking-[3px]" style={{ color: 'oklch(1 0 0 / 0.6)', fontSize: '8px', lineHeight: '12px' }}>
-            GARANTA SUA VAGA ANTES QUE O <span style={{ color: 'oklch(0.866 0.284 142.495)' }}>PREÇO SUBA</span>
-          </p>
         </div>
       </main>
       
