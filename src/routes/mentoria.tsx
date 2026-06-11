@@ -190,10 +190,6 @@ function Mentoria() {
             Mentoria CPA
           </h1>
 
-          <p className="mt-6 max-w-2xl font-montserrat text-lg leading-relaxed text-white/90">
-            Chegou a hora de parar de tentar sozinho e seguir o caminho trilhado por quem já chegou lá.
-            Vou te entregar <strong className="text-brand-green">na palma da mão</strong> tudo o que eu faço para lucrar alto todos os dias.
-          </p>
 
           <section className="mt-16 w-full text-center">
             <div className="group relative aspect-video w-full max-w-4xl mx-auto overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
