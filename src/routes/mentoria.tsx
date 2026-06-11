@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
-import { Play, Pause, Volume2, VolumeX, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 export const Route = createFileRoute("/mentoria")({
