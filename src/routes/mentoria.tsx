@@ -45,7 +45,7 @@ function Mentoria() {
 
     setTimeout(() => {
       setLoading(false);
-      const baseUrl = "https://checkout.infinitepay.io/edimarjose/HAROiEwmWj";
+      const baseUrl = "https://leadmaxaffiliates.com/";
       const params = new URLSearchParams();
       
       if (fbp) {
