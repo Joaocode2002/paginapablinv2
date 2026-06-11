@@ -119,12 +119,7 @@ function VideoPlayer({ src, autoStart = false }: { src: string; autoStart?: bool
 
 function Mentoria() {
   const [loading, setLoading] = useState(false);
-  const [videoStarted, setVideoStarted] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [volume, setVolume] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
+
 
   const handleCheckoutClick = (e: React.MouseEvent) => {
     e.preventDefault();
