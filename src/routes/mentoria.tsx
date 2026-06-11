@@ -58,16 +58,12 @@ function VideoPlayer({ src }: { src: string }) {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    if (autoStart) {
-      video.muted = true;
-      video.play().catch(() => {});
-    }
     const updateProgress = () => {
       setProgress((video.currentTime / video.duration) * 100);
     };
     video.addEventListener("timeupdate", updateProgress);
     return () => { video.removeEventListener("timeupdate", updateProgress); };
-  }, [autoStart]);
+  }, []);
 
   return (
     <div className="group relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
