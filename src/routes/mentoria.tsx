@@ -163,23 +163,6 @@ function Mentoria() {
 
 
 
-  const features = [
-    {
-      icon: <Target className="h-6 w-6 text-brand-green" />,
-      title: "Estratégias Avançadas",
-      description: "Aprenda os métodos que ninguém te conta para maximizar seus lucros diariamente."
-    },
-    {
-      icon: <Users className="h-6 w-6 text-brand-green" />,
-      title: "Suporte VIP",
-      description: "Acompanhamento direto para tirar todas as suas dúvidas e acelerar seus resultados."
-    },
-    {
-      icon: <Trophy className="h-6 w-6 text-brand-green" />,
-      title: "Comunidade Exclusiva",
-      description: "Faça networking com os maiores players do mercado e troque experiências reais."
-    }
-  ];
 
   return (
     <div className="bg-black text-white selection:bg-brand-green selection:text-black">
@@ -269,21 +252,6 @@ function Mentoria() {
             </div>
           </section>
 
-          <div className="mt-16 grid w-full grid-cols-1 gap-6 md:grid-cols-3">
-            {features.map((feature, idx) => (
-              <div key={idx} className="flex flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-transform hover:scale-[1.02]">
-                <div className="mb-4 rounded-full bg-brand-green/10 p-4">
-                  {feature.icon}
-                </div>
-                <h3 className="mb-2 font-bebas text-xl tracking-wider text-brand-green">
-                  {feature.title}
-                </h3>
-                <p className="text-sm font-montserrat text-white/70">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
 
           <div className="mt-16 w-full max-w-md flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
             <h3 className="mb-6 font-bebas text-2xl tracking-widest text-white uppercase">O que você vai receber:</h3>
