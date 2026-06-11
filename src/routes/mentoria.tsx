@@ -236,6 +236,21 @@ function Mentoria() {
             </div>
           </section>
 
+          <section className="mt-8 w-full grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {[2, 3, 4].map((n) => (
+              <div key={n} className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-xl">
+                <video
+                  className="h-full w-full object-cover"
+                  playsInline
+                  controls
+                  preload="metadata"
+                  poster="/video-poster.png"
+                >
+                  <source src={`/video${n}.mp4`} type="video/mp4" />
+                </video>
+              </div>
+            ))}
+
           <div className="mt-16 w-full max-w-md flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
             <h3 className="mb-6 font-bebas text-2xl tracking-widest text-white uppercase">O que você vai receber:</h3>
             <ul className="mb-8 flex flex-col gap-4 text-left w-full">
