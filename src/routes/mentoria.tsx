@@ -196,7 +196,7 @@ function Mentoria() {
 
           <section className="mt-16 w-full text-center max-w-4xl mx-auto">
             <h3 className="mb-4 font-bebas text-2xl md:text-3xl tracking-widest text-brand-green uppercase">Criando sua conta na plataforma</h3>
-            <VideoPlayer src="/mentoria1.mp4" autoStart />
+            <VideoPlayer src="/mentoria1.mp4" />
           </section>
 
           <section className="mt-8 w-full flex flex-col gap-10 max-w-4xl mx-auto">
