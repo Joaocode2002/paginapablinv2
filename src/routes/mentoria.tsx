@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
-import { Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 export const Route = createFileRoute("/mentoria")({
@@ -43,6 +43,20 @@ function VideoPlayer({ src }: { src: string }) {
     const val = parseFloat(e.target.value);
     const v = videoRef.current;
     if (v) { v.currentTime = (val / 100) * v.duration; setProgress(val); }
+  };
+
+  const toggleFullscreen = () => {
+    const v = videoRef.current as any;
+    if (!v) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else if (v.requestFullscreen) {
+      v.requestFullscreen();
+    } else if (v.webkitEnterFullscreen) {
+      v.webkitEnterFullscreen();
+    } else if (v.webkitRequestFullscreen) {
+      v.webkitRequestFullscreen();
+    }
   };
 
   const startVideo = () => {
@@ -116,6 +130,9 @@ function VideoPlayer({ src }: { src: string }) {
               />
             </div>
           </div>
+          <button onClick={toggleFullscreen} className="text-white hover:text-brand-green">
+            <Maximize className="h-6 w-6" />
+          </button>
         </div>
       </div>
 
