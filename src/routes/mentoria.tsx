@@ -1,20 +1,125 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
-import { Play, Pause, Volume2, VolumeX, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
 export const Route = createFileRoute("/mentoria")({
   component: Mentoria,
 });
 
-function Mentoria() {
-  const [loading, setLoading] = useState(false);
+function VideoPlayer({ src, autoStart = false }: { src: string; autoStart?: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [videoStarted, setVideoStarted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) { v.play(); setIsPlaying(true); }
+    else { v.pause(); setIsPlaying(false); }
+  };
+
+  const toggleMute = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setIsMuted(v.muted);
+    if (!v.muted && volume === 0) { setVolume(1); v.volume = 1; }
+  };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = parseFloat(e.target.value);
+    setVolume(val);
+    const v = videoRef.current;
+    if (v) { v.volume = val; v.muted = val === 0; setIsMuted(val === 0); }
+  };
+
+  const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = parseFloat(e.target.value);
+    const v = videoRef.current;
+    if (v) { v.currentTime = (val / 100) * v.duration; setProgress(val); }
+  };
+
+  const startVideo = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = false;
+    v.play();
+    setIsMuted(false);
+    setIsPlaying(true);
+    setVideoStarted(true);
+    setVolume(1);
+    v.volume = 1;
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (autoStart) {
+      video.muted = true;
+      video.play().catch(() => {});
+    }
+    const updateProgress = () => {
+      setProgress((video.currentTime / video.duration) * 100);
+    };
+    video.addEventListener("timeupdate", updateProgress);
+    return () => { video.removeEventListener("timeupdate", updateProgress); };
+  }, [autoStart]);
+
+  return (
+    <div className="group relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
+      <video
+        ref={videoRef}
+        className="h-full w-full object-cover"
+        playsInline
+        poster="/video-poster.png"
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+
+      <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:p-6">
+        <input
+          type="range" min="0" max="100" value={progress}
+          onChange={handleProgressChange}
+          className="h-1 w-full cursor-pointer appearance-none rounded-lg bg-white/30 accent-brand-green"
+        />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <button onClick={togglePlay} className="text-white hover:text-brand-green">
+              {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
+            </button>
+            <div className="flex items-center gap-2">
+              <button onClick={toggleMute} className="text-white hover:text-brand-green">
+                {isMuted ? <VolumeX className="h-6 w-6" /> : <Volume2 className="h-6 w-6" />}
+              </button>
+              <input
+                type="range" min="0" max="1" step="0.1" value={volume}
+                onChange={handleVolumeChange}
+                className="h-1 w-20 cursor-pointer appearance-none rounded-lg bg-white/30 accent-brand-green"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {!videoStarted && (
+        <button onClick={startVideo} className="absolute inset-0 z-20 flex items-center justify-center bg-black/20">
+          <div className="flex items-center justify-center rounded-full bg-brand-green/90 p-6 text-black shadow-lg transition-transform hover:scale-110">
+            <Play className="h-10 w-10 fill-current" />
+          </div>
+        </button>
+      )}
+    </div>
+  );
+}
+
+
+function Mentoria() {
+  const [loading, setLoading] = useState(false);
+
 
   const handleCheckoutClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -63,97 +168,6 @@ function Mentoria() {
     }, 1200);
   };
 
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-        setIsPlaying(true);
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      }
-    }
-  };
-
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
-      if (!videoRef.current.muted && volume === 0) {
-        setVolume(1);
-        videoRef.current.volume = 1;
-      }
-    }
-  };
-
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = parseFloat(e.target.value);
-    setVolume(val);
-    if (videoRef.current) {
-      videoRef.current.volume = val;
-      videoRef.current.muted = val === 0;
-      setIsMuted(val === 0);
-    }
-  };
-
-  const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = parseFloat(e.target.value);
-    if (videoRef.current) {
-      const time = (val / 100) * videoRef.current.duration;
-      videoRef.current.currentTime = time;
-      setProgress(val);
-    }
-  };
-
-  const startVideo = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = false;
-      videoRef.current.play();
-      setIsMuted(false);
-      setIsPlaying(true);
-      setVideoStarted(true);
-      setVolume(1);
-      videoRef.current.volume = 1;
-    }
-  };
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    video.play().catch(error => {
-      console.log("Auto-play was prevented:", error);
-    });
-
-    const updateProgress = () => {
-      const p = (video.currentTime / video.duration) * 100;
-      setProgress(p);
-    };
-
-    const handleInteraction = () => {
-      if (videoRef.current && videoRef.current.muted) {
-        videoRef.current.muted = false;
-        setIsMuted(false);
-        setVideoStarted(true);
-        setIsPlaying(true);
-        setVolume(1);
-        videoRef.current.volume = 1;
-        document.removeEventListener("touchstart", handleInteraction);
-        document.removeEventListener("click", handleInteraction);
-      }
-    };
-
-    document.addEventListener("touchstart", handleInteraction);
-    document.addEventListener("click", handleInteraction);
-
-    video.addEventListener("timeupdate", updateProgress);
-    return () => {
-      video.removeEventListener("timeupdate", updateProgress);
-      document.removeEventListener("touchstart", handleInteraction);
-      document.removeEventListener("click", handleInteraction);
-    };
-  }, []);
 
   return (
     <div className="bg-black text-white selection:bg-brand-green selection:text-black">
@@ -184,51 +198,9 @@ function Mentoria() {
             Comece a escalar sua operação de <strong className="text-brand-green">CPA</strong> com uma plataforma de grandes players e intuitiva. Abaixo segue o tutorial de como começar.
           </p>
 
-          <section className="mt-16 w-full text-center">
+          <section className="mt-16 w-full text-center max-w-4xl mx-auto">
             <h3 className="mb-4 font-bebas text-2xl md:text-3xl tracking-widest text-brand-green uppercase">Criando sua conta na plataforma</h3>
-            <div className="group relative aspect-video w-full max-w-4xl mx-auto overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
-              <video 
-                ref={videoRef}
-                className="h-full w-full object-cover"
-                playsInline
-                poster="/video-poster.png"
-              >
-                <source src="/mentoria1.mp4" type="video/mp4" />
-              </video>
-
-              <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:p-6">
-                <input 
-                  type="range" min="0" max="100" value={progress}
-                  onChange={handleProgressChange}
-                  className="h-1 w-full cursor-pointer appearance-none rounded-lg bg-white/30 accent-brand-green"
-                />
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <button onClick={togglePlay} className="text-white hover:text-brand-green">
-                      {isPlaying ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
-                    </button>
-                    <div className="flex items-center gap-2">
-                      <button onClick={toggleMute} className="text-white hover:text-brand-green">
-                        {isMuted ? <VolumeX className="h-6 w-6" /> : <Volume2 className="h-6 w-6" />}
-                      </button>
-                      <input 
-                        type="range" min="0" max="1" step="0.1" value={volume}
-                        onChange={handleVolumeChange}
-                        className="h-1 w-20 cursor-pointer appearance-none rounded-lg bg-white/30 accent-brand-green"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {!videoStarted && (
-                <button onClick={startVideo} className="absolute inset-0 z-20 flex items-center justify-center bg-black/20">
-                  <div className="flex items-center justify-center rounded-full bg-brand-green/90 p-6 text-black shadow-lg transition-transform hover:scale-110">
-                    <Play className="h-10 w-10 fill-current" />
-                  </div>
-                </button>
-              )}
-            </div>
+            <VideoPlayer src="/mentoria1.mp4" autoStart />
           </section>
 
           <section className="mt-8 w-full flex flex-col gap-10 max-w-4xl mx-auto">
@@ -239,17 +211,7 @@ function Mentoria() {
             ].map(({ n, title }) => (
               <div key={n} className="w-full text-center">
                 <h3 className="mb-4 font-bebas text-2xl md:text-3xl tracking-widest text-brand-green uppercase">{title}</h3>
-                <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-xl">
-                  <video
-                    className="h-full w-full object-cover"
-                    playsInline
-                    controls
-                    preload="metadata"
-                    poster="/video-poster.png"
-                  >
-                    <source src={`/mentoria${n}.mp4`} type="video/mp4" />
-                  </video>
-                </div>
+                <VideoPlayer src={`/mentoria${n}.mp4`} />
               </div>
             ))}
           </section>
