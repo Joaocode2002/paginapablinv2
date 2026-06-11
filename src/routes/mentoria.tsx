@@ -185,6 +185,7 @@ function Mentoria() {
           </p>
 
           <section className="mt-16 w-full text-center">
+            <h3 className="mb-4 font-bebas text-2xl md:text-3xl tracking-widest text-brand-green uppercase">Criando sua conta na plataforma</h3>
             <div className="group relative aspect-video w-full max-w-4xl mx-auto overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
               <video 
                 ref={videoRef}
@@ -230,18 +231,25 @@ function Mentoria() {
             </div>
           </section>
 
-          <section className="mt-8 w-full flex flex-col gap-6 max-w-4xl mx-auto">
-            {[2, 3, 4].map((n) => (
-              <div key={n} className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-xl">
-                <video
-                  className="h-full w-full object-cover"
-                  playsInline
-                  controls
-                  preload="metadata"
-                  poster="/video-poster.png"
-                >
-                  <source src={`/mentoria${n}.mp4`} type="video/mp4" />
-                </video>
+          <section className="mt-8 w-full flex flex-col gap-10 max-w-4xl mx-auto">
+            {[
+              { n: 2, title: "Como funciona a plataforma" },
+              { n: 3, title: "Como funciona a operação" },
+              { n: 4, title: "Como acessar pelo telefone" },
+            ].map(({ n, title }) => (
+              <div key={n} className="w-full text-center">
+                <h3 className="mb-4 font-bebas text-2xl md:text-3xl tracking-widest text-brand-green uppercase">{title}</h3>
+                <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-xl">
+                  <video
+                    className="h-full w-full object-cover"
+                    playsInline
+                    controls
+                    preload="metadata"
+                    poster="/video-poster.png"
+                  >
+                    <source src={`/mentoria${n}.mp4`} type="video/mp4" />
+                  </video>
+                </div>
               </div>
             ))}
           </section>
