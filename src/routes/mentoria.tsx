@@ -236,7 +236,7 @@ function Mentoria() {
             </div>
           </section>
 
-          <section className="mt-8 w-full grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <section className="mt-8 w-full flex flex-col gap-6 max-w-4xl mx-auto">
             {[2, 3, 4].map((n) => (
               <div key={n} className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-xl">
                 <video
