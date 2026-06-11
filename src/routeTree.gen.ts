@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PromocopaRouteImport } from './routes/promocopa'
+import { Route as MentoriaRouteImport } from './routes/mentoria'
 import { Route as AprovadoRouteImport } from './routes/aprovado'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PromocopaRoute = PromocopaRouteImport.update({
   id: '/promocopa',
   path: '/promocopa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentoriaRoute = MentoriaRouteImport.update({
+  id: '/mentoria',
+  path: '/mentoria',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AprovadoRoute = AprovadoRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/aprovado': typeof AprovadoRoute
+  '/mentoria': typeof MentoriaRoute
   '/promocopa': typeof PromocopaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/aprovado': typeof AprovadoRoute
+  '/mentoria': typeof MentoriaRoute
   '/promocopa': typeof PromocopaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/aprovado': typeof AprovadoRoute
+  '/mentoria': typeof MentoriaRoute
   '/promocopa': typeof PromocopaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/aprovado' | '/promocopa'
+  fullPaths: '/' | '/aprovado' | '/mentoria' | '/promocopa'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/aprovado' | '/promocopa'
-  id: '__root__' | '/' | '/aprovado' | '/promocopa'
+  to: '/' | '/aprovado' | '/mentoria' | '/promocopa'
+  id: '__root__' | '/' | '/aprovado' | '/mentoria' | '/promocopa'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AprovadoRoute: typeof AprovadoRoute
+  MentoriaRoute: typeof MentoriaRoute
   PromocopaRoute: typeof PromocopaRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/promocopa'
       fullPath: '/promocopa'
       preLoaderRoute: typeof PromocopaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentoria': {
+      id: '/mentoria'
+      path: '/mentoria'
+      fullPath: '/mentoria'
+      preLoaderRoute: typeof MentoriaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/aprovado': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AprovadoRoute: AprovadoRoute,
+  MentoriaRoute: MentoriaRoute,
   PromocopaRoute: PromocopaRoute,
 }
 export const routeTree = rootRouteImport
