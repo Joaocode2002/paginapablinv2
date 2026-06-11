@@ -15,7 +15,7 @@ function Mentoria() {
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  
 
   const handleCheckoutClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -161,31 +161,7 @@ function Mentoria() {
     };
   }, []);
 
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
 
-    let animationId: number;
-    const scroll = () => {
-      carousel.scrollLeft += 1;
-      if (carousel.scrollLeft >= (carousel.scrollWidth / 3)) {
-        carousel.scrollLeft = 0;
-      }
-      animationId = requestAnimationFrame(scroll);
-    };
-
-    animationId = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationId);
-  }, []);
-
-  const MAX_RESULTS = 50;
-  const results: string[] = Array.from({ length: MAX_RESULTS }, (_, i) => `/resultados/${i + 1}.png`);
-  
-  const [shuffledResults] = useState(() => {
-    return [...results].sort(() => Math.random() - 0.5);
-  });
-
-  const carouselItems = [...shuffledResults, ...shuffledResults, ...shuffledResults];
 
   const features = [
     {
@@ -330,15 +306,6 @@ function Mentoria() {
               </li>
             </ul>
 
-            <div className="flex flex-col items-center">
-              <span className="text-sm font-medium text-white/60 line-through">VALOR ORIGINAL R$ 997,00</span>
-              <div className="flex items-start gap-1">
-                <span className="mt-2 text-xl font-bold text-white">POR R$</span>
-                <span className="text-7xl font-black tracking-tighter text-brand-green">297</span>
-                <span className="mt-2 text-3xl font-bold text-brand-green">,00</span>
-              </div>
-              <span className="mt-2 text-xs font-bold text-white/40 italic">Ou em até 12x no cartão</span>
-            </div>
           </div>
 
           <button 
@@ -361,30 +328,6 @@ function Mentoria() {
             </span>
           </button>
 
-          <section className="mt-20 w-full overflow-hidden">
-            <h2 className="mb-10 font-bebas text-[clamp(2rem,6vw,3.5rem)] tracking-widest text-brand-green uppercase">
-              Provas Sociais
-            </h2>
-            <div className="relative">
-              <div ref={carouselRef} className="flex gap-0 overflow-x-hidden scroll-smooth pb-4 scrollbar-hide">
-                {carouselItems.map((src, idx) => (
-                  <div key={idx} className="min-w-[calc(40.5%-8px)] shrink-0 md:min-w-[calc(26.66%-11px)]">
-                    <div className="aspect-[9/16] w-[88.2%] md:w-[95%] max-w-[270px] md:max-w-[320px] overflow-hidden rounded-lg border border-white/10 bg-zinc-900 shadow-lg mx-auto">
-                      <img 
-                        src={src} alt={`Resultado ${(idx % results.length) + 1}`} 
-                        className="h-full w-full object-cover"
-                        loading="lazy"
-                        onError={(e) => {
-                          const parent = (e.currentTarget.closest('.shrink-0') as HTMLElement);
-                          if (parent) parent.style.display = 'none';
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
           
           <p className="mt-4 text-center uppercase font-montserrat font-bold tracking-[3px]" style={{ color: 'oklch(1 0 0 / 0.6)', fontSize: '8px', lineHeight: '12px' }}>
             GARANTA SUA VAGA ANTES QUE O <span style={{ color: 'oklch(0.866 0.284 142.495)' }}>PREÇO SUBA</span>
