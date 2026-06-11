@@ -31,7 +31,7 @@
       'https://connect.facebook.net/en_US/fbevents.js');
       
       // Só executa o pixel se estiver no domínio correto e NÃO estiver na página de aprovado
-      if (window.location.hostname === 'pablinmetodos.com.br' && !window.location.pathname.includes('/aprovado')) {
+      if (window.location.hostname === 'pablinmetodos.com.br' && !window.location.pathname.includes('/aprovado') && !window.location.pathname.includes('/mentoria')) {
         fbq('init', '1906227756853653');
         fbq('track', 'PageView');
       }
