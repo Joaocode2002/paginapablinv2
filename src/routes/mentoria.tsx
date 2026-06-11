@@ -330,15 +330,6 @@ function Mentoria() {
               </li>
             </ul>
 
-            <div className="flex flex-col items-center">
-              <span className="text-sm font-medium text-white/60 line-through">VALOR ORIGINAL R$ 997,00</span>
-              <div className="flex items-start gap-1">
-                <span className="mt-2 text-xl font-bold text-white">POR R$</span>
-                <span className="text-7xl font-black tracking-tighter text-brand-green">297</span>
-                <span className="mt-2 text-3xl font-bold text-brand-green">,00</span>
-              </div>
-              <span className="mt-2 text-xs font-bold text-white/40 italic">Ou em até 12x no cartão</span>
-            </div>
           </div>
 
           <button 
