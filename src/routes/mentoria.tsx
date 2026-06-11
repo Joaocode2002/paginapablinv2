@@ -184,11 +184,11 @@ function Mentoria() {
   return (
     <div className="bg-black text-white selection:bg-brand-green selection:text-black">
       <Helmet>
-        <title>Pablog - Mentoria VIP</title>
+        <title>Pablog - Mentoria CPA</title>
       </Helmet>
       
       <header className="fixed top-0 left-0 z-50 flex w-full items-center justify-center border-b border-white/10 bg-[#0f7a2e] px-4 py-3 text-center text-xs font-bold tracking-wide text-white">
-        <span>VAGAS LIMITADAS PARA A MENTORIA VIP</span>
+        <span>VAGAS LIMITADAS PARA A MENTORIA CPA</span>
         <AlertTriangle className="ml-2 h-4 w-4 text-yellow-400 stroke-[3px]" />
       </header>
 
@@ -211,7 +211,7 @@ function Mentoria() {
           <div className="flex flex-col items-center gap-2">
             <span className="font-bebas text-2xl tracking-[0.3em] text-white/80 uppercase">Acesso Exclusivo</span>
             <h1 className="font-bebas text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.92] tracking-wider text-brand-green uppercase">
-              Mentoria VIP 2026
+              Mentoria CPA
             </h1>
           </div>
 
@@ -322,7 +322,7 @@ function Mentoria() {
               ) : (
                 <>
                   <Play className="h-6 w-6" />
-                  Quero me tornar um Aluno VIP
+                  Quero me tornar um Aluno CPA
                 </>
               )}
             </span>
