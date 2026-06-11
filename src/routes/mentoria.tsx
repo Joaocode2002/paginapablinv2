@@ -161,22 +161,6 @@ function Mentoria() {
     };
   }, []);
 
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-
-    let animationId: number;
-    const scroll = () => {
-      carousel.scrollLeft += 1;
-      if (carousel.scrollLeft >= (carousel.scrollWidth / 3)) {
-        carousel.scrollLeft = 0;
-      }
-      animationId = requestAnimationFrame(scroll);
-    };
-
-    animationId = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationId);
-  }, []);
 
 
   const features = [
