@@ -289,7 +289,7 @@ function Mentoria() {
               ) : (
                 <>
                   <Play className="h-6 w-6" />
-                  Quero me tornar um Aluno CPA
+                  Criar minha conta
                 </>
               )}
             </span>
