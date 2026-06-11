@@ -7,6 +7,8 @@ export const Route = createFileRoute("/mentoria")({
   component: Mentoria,
 });
 
+const activeVideos = new Set<HTMLVideoElement>();
+
 function VideoPlayer({ src }: { src: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoStarted, setVideoStarted] = useState(false);
