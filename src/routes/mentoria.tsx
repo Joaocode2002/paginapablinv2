@@ -161,12 +161,7 @@ function Mentoria() {
         <title>Pablog - Mentoria CPA</title>
       </Helmet>
       
-      <header className="fixed top-0 left-0 z-50 flex w-full items-center justify-center border-b border-white/10 bg-[#0f7a2e] px-4 py-3 text-center text-xs font-bold tracking-wide text-white">
-        <span>VAGAS LIMITADAS PARA A MENTORIA CPA</span>
-        <AlertTriangle className="ml-2 h-4 w-4 text-yellow-400 stroke-[3px]" />
-      </header>
-
-      <main className="relative flex min-h-screen flex-col items-center justify-start overflow-hidden pt-24 pb-20">
+      <main className="relative flex min-h-screen flex-col items-center justify-start overflow-hidden pt-10 pb-20">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-60 brightness-[0.7] contrast-[1.1]" 
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1511193311914-0346f16efe90?q=80&w=2073&auto=format&fit=crop')" }}
