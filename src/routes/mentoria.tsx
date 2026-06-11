@@ -217,7 +217,7 @@ function Mentoria() {
             {[
               { n: 2, title: "Como funciona a plataforma", src: "/mentoria2.mp4" },
               { n: 3, title: "Como funciona a operação", src: "https://res.cloudinary.com/dvqmvjjd4/video/upload/mentoria3_kbpemr.mp4" },
-              { n: 4, title: "Como acessar pelo telefone", src: "https://res.cloudinary.com/dvqmvjjd4/video/upload/v1781164285/mentoria4_vperlc.mp4" },
+              { n: 4, title: "Como acessar pelo telefone", src: "https://res.cloudinary.com/dvqmvjjd4/video/upload/Design_sem_nome_d1bq2x.mp4" },
             ].map(({ n, title, src }) => (
               <div key={n} className="w-full text-center">
                 <h3 className="mb-4 font-bebas text-2xl md:text-3xl tracking-widest text-brand-green uppercase">{title}</h3>
