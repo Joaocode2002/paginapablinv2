@@ -17,6 +17,14 @@ function Promocopa() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const fbq = (window as any).fbq;
+    if (typeof fbq === "function" && window.location.hostname === 'pablinmetodos.com.br') {
+      fbq("init", "1906227756853653");
+      fbq("track", "PageView");
+    }
+  }, []);
+
   const handleWppClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setLoading(true);
