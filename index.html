@@ -30,21 +30,21 @@
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       
-      // Só executa o pixel se estiver no domínio correto e NÃO estiver na página de aprovado
-      if (window.location.hostname === 'pablinmetodos.com.br' && !window.location.pathname.includes('/aprovado') && !window.location.pathname.includes('/mentoria')) {
+      // Só executa o pixel se estiver no domínio correto e NÃO estiver na página de aprovado/mentoria/afun
+      if (window.location.hostname === 'pablinmetodos.com.br' && !window.location.pathname.includes('/aprovado') && !window.location.pathname.includes('/mentoria') && !window.location.pathname.includes('/afun')) {
         fbq('init', '1906227756853653');
         fbq('track', 'PageView');
       }
     </script>
     <noscript>
       <script>
-        if (window.location.hostname === 'pablinmetodos.com.br' && !window.location.pathname.includes('/aprovado') && !window.location.pathname.includes('/mentoria')) {
+        if (window.location.hostname === 'pablinmetodos.com.br' && !window.location.pathname.includes('/aprovado') && !window.location.pathname.includes('/mentoria') && !window.location.pathname.includes('/afun')) {
           document.write('<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1906227756853653&ev=PageView&noscript=1" />');
         }
       </script>
     </noscript>
     <!-- End Meta Pixel Code -->
-    <script type="module" crossorigin src="/assets/index-ChkCckqo.js"></script>
+    <script type="module" crossorigin src="/assets/index-BdsNiiBb.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-C-ggOfPY.css">
   </head>
   <body>
