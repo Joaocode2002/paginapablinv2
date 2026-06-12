@@ -17,7 +17,7 @@ function Afun() {
     const fbq = (window as any).fbq;
     if (typeof fbq === "function") {
       fbq("init", AFUN_PIXEL_ID);
-      fbq("track", "PageView");
+      fbq("trackSingle", AFUN_PIXEL_ID, "PageView");
     }
   }, []);
 
@@ -41,7 +41,7 @@ function Afun() {
 
     const fbq = (window as any).fbq;
     if (typeof fbq === "function") {
-      fbq("track", "Lead");
+      fbq("trackSingle", AFUN_PIXEL_ID, "Lead");
     }
 
     setTimeout(() => {
