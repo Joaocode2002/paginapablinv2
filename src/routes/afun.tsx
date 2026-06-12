@@ -23,6 +23,12 @@ function Afun() {
   const handleWppClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setLoadingWpp(true);
+
+    const fbq = (window as any).fbq;
+    if (typeof fbq === "function") {
+      fbq("track", "Lead");
+    }
+
     setTimeout(() => {
       setLoadingWpp(false);
       const message = encodeURIComponent("Oi Pablog, já criei e verifiquei minha conta na Afun. Quero receber minha banca!");
