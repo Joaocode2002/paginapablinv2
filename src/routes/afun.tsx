@@ -94,7 +94,7 @@ function Afun() {
             </p>
             
             <p className="max-w-xl mx-auto font-montserrat text-lg text-white/80">
-              Após realizar o cadastro na plataforma e fazer toda a verificação, volte nesta página que irá aparecer um botão para me chamar no WhatsApp e resgatar sua banca.
+              Após realizar o cadastro na plataforma e fazer toda a verificação, volte nesta página que o botão do WhatsApp estará ativo!
             </p>
           </div>
 
