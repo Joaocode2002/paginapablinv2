@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AlertTriangle, MessageCircle, ArrowRight } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+
+const AFUN_PIXEL_ID = "2541286106305644";
 
 export const Route = createFileRoute("/afun")({
   component: Afun,
@@ -11,9 +13,22 @@ function Afun() {
   const [loadingAfun, setLoadingAfun] = useState(false);
   const [loadingWpp, setLoadingWpp] = useState(false);
 
+  useEffect(() => {
+    const fbq = (window as any).fbq;
+    if (typeof fbq === "function") {
+      fbq("init", AFUN_PIXEL_ID);
+      fbq("track", "PageView");
+    }
+  }, []);
+
   const handleAfunClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setLoadingAfun(true);
+
+    const fbq = (window as any).fbq;
+    if (typeof fbq === "function") {
+      fbq("trackSingle", AFUN_PIXEL_ID, "Lead");
+    }
     setTimeout(() => {
       setLoadingAfun(false);
       window.location.href = "https://afun.bet.br/?ad_type=207&ch=1330001&ic=5700043&ad_extra=1781229453";
