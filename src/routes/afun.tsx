@@ -117,6 +117,27 @@ function Afun() {
               </span>
             </button>
 
+            {/* Botão WhatsApp - visual, bloqueado */}
+            <button
+              type="button"
+              onClick={() => setShowLockedMsg(true)}
+              aria-disabled="true"
+              className="relative inline-flex min-h-16 w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-b from-[#00a300]/60 to-[#006400]/60 px-8 py-4 font-outfit text-xl font-bold text-white/80 border border-white/10 shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-2px_4px_rgba(0,0,0,0.3)] cursor-not-allowed grayscale-[0.3]"
+            >
+              <WhatsAppIcon className="h-6 w-6 opacity-70" />
+              Receber banca
+              <Lock className="h-5 w-5 text-yellow-300" />
+            </button>
+
+            {showLockedMsg && (
+              <div
+                role="alert"
+                className="rounded-xl border border-yellow-400/40 bg-yellow-400/10 px-4 py-3 text-sm font-medium text-yellow-200 text-center animate-in fade-in"
+              >
+                Cadastre-se na plataforma e complete a verificação para liberar sua banca.
+              </div>
+            )}
+
             {/* Botão WhatsApp - desativado temporariamente */}
             {false && (
               <button 
