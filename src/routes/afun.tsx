@@ -16,7 +16,7 @@ function Afun() {
     setLoadingAfun(true);
     setTimeout(() => {
       setLoadingAfun(false);
-      window.location.href = "https://www.afun.com/register?code=PABLOG";
+      window.location.href = "https://afun.bet.br/?ad_type=207&ch=1330001&ic=5700043&ad_extra=1781229453";
     }, 800);
   };
 
