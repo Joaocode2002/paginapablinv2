@@ -85,7 +85,7 @@ function Afun() {
                   <div className="h-6 w-6 animate-spin rounded-full border-2 border-white border-t-transparent" />
                 ) : (
                   <>
-                    Criar conta na Afun
+                    Cadastrar na plataforma
                     <ArrowRight className="h-5 w-5 text-brand-green" />
                   </>
                 )}
