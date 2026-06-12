@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PromocopaRouteImport } from './routes/promocopa'
 import { Route as MentoriaRouteImport } from './routes/mentoria'
 import { Route as AprovadoRouteImport } from './routes/aprovado'
+import { Route as AfunRouteImport } from './routes/afun'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PromocopaRoute = PromocopaRouteImport.update({
@@ -29,6 +30,11 @@ const AprovadoRoute = AprovadoRouteImport.update({
   path: '/aprovado',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AfunRoute = AfunRouteImport.update({
+  id: '/afun',
+  path: '/afun',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/afun': typeof AfunRoute
   '/aprovado': typeof AprovadoRoute
   '/mentoria': typeof MentoriaRoute
   '/promocopa': typeof PromocopaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/afun': typeof AfunRoute
   '/aprovado': typeof AprovadoRoute
   '/mentoria': typeof MentoriaRoute
   '/promocopa': typeof PromocopaRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/afun': typeof AfunRoute
   '/aprovado': typeof AprovadoRoute
   '/mentoria': typeof MentoriaRoute
   '/promocopa': typeof PromocopaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/aprovado' | '/mentoria' | '/promocopa'
+  fullPaths: '/' | '/afun' | '/aprovado' | '/mentoria' | '/promocopa'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/aprovado' | '/mentoria' | '/promocopa'
-  id: '__root__' | '/' | '/aprovado' | '/mentoria' | '/promocopa'
+  to: '/' | '/afun' | '/aprovado' | '/mentoria' | '/promocopa'
+  id: '__root__' | '/' | '/afun' | '/aprovado' | '/mentoria' | '/promocopa'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AfunRoute: typeof AfunRoute
   AprovadoRoute: typeof AprovadoRoute
   MentoriaRoute: typeof MentoriaRoute
   PromocopaRoute: typeof PromocopaRoute
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AprovadoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/afun': {
+      id: '/afun'
+      path: '/afun'
+      fullPath: '/afun'
+      preLoaderRoute: typeof AfunRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AfunRoute: AfunRoute,
   AprovadoRoute: AprovadoRoute,
   MentoriaRoute: MentoriaRoute,
   PromocopaRoute: PromocopaRoute,
