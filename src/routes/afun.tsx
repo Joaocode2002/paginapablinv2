@@ -31,7 +31,7 @@ function Afun() {
 
     setTimeout(() => {
       setLoadingWpp(false);
-      const message = encodeURIComponent("Oi Pablog, já criei e verifiquei minha conta na Afun. Quero receber minha banca!");
+      const message = encodeURIComponent("Acabei de me cadastrar como faço para resgatar minha banca!");
       window.location.href = `https://wa.me/5531991950946?text=${message}`;
     }, 800);
   };
