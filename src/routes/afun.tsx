@@ -110,10 +110,10 @@ function Afun() {
               </span>
             </button>
 
-            {/* Botão WhatsApp */}
+            {/* Botão WhatsApp - desativado temporariamente */}
             <button 
               onClick={handleWppClick}
-              className="group relative inline-flex min-h-16 w-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl p-[2px] transition-all active:scale-[0.98] shadow-[0_0_20px_rgba(34,197,94,0.3)]"
+              className="hidden group relative inline-flex min-h-16 w-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl p-[2px] transition-all active:scale-[0.98] shadow-[0_0_20px_rgba(34,197,94,0.3)]"
             >
               <span className="absolute inset-[-200%] animate-border-rotate bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22c55e_5%,transparent_10%,transparent_50%,#22c55e_55%,transparent_60%)]" />
               <span className="relative z-10 flex h-full w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-b from-[#00a300] to-[#006400] px-8 py-4 font-outfit text-xl font-bold text-white shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-2px_4px_rgba(0,0,0,0.3)]">
