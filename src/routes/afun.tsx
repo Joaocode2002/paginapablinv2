@@ -127,7 +127,7 @@ function Afun() {
       
       <footer className="relative z-50 w-full bg-black py-10 px-4 flex flex-col items-center gap-4">
         <p className="text-[0.56rem] md:text-[0.7rem] uppercase tracking-[0.25em] text-foreground/45 text-center">
-          @PABLOG MÉTODOS<br />© 2026 TODOS OS DIREITOS RESERVADOS.
+          © 2026 TODOS OS DIREITOS RESERVADOS.
         </p>
       </footer>
     </div>
