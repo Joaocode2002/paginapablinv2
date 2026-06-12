@@ -83,7 +83,7 @@ function Afun() {
             </h1>
             
             <p className="max-w-xl mx-auto font-montserrat text-xl md:text-2xl leading-relaxed text-white font-medium">
-              Para receber a banca, preciso que você <strong className="text-brand-green">crie a conta</strong> na plataforma abaixo e <strong className="text-brand-green">verifique</strong>.
+              Para receber a banca, preciso que você <strong className="text-brand-green">crie a conta</strong> na plataforma abaixo e <strong className="text-brand-green">verifique sua conta</strong>.
             </p>
             
             <p className="max-w-xl mx-auto font-montserrat text-lg text-white/80">
