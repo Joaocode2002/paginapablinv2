@@ -104,7 +104,7 @@ function Afun() {
                 ) : (
                   <>
                     <MessageCircle className="h-6 w-6" />
-                    Chamar no WhatsApp
+                    Receber banca
                   </>
                 )}
               </span>
