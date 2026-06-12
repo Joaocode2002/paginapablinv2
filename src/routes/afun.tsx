@@ -18,6 +18,13 @@ export const Route = createFileRoute("/afun")({
 function Afun() {
   const [loadingAfun, setLoadingAfun] = useState(false);
   const [loadingWpp, setLoadingWpp] = useState(false);
+  const [showLockedMsg, setShowLockedMsg] = useState(false);
+
+  useEffect(() => {
+    if (!showLockedMsg) return;
+    const t = setTimeout(() => setShowLockedMsg(false), 4000);
+    return () => clearTimeout(t);
+  }, [showLockedMsg]);
 
   useEffect(() => {
     const fbq = (window as any).fbq;
