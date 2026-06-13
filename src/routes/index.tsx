@@ -144,6 +144,20 @@ function Index() {
     };
   }, []);
 
+  // Auto-hide controls when playing
+  useEffect(() => {
+    if (!isPlaying) {
+      if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
+      setControlsVisible(true);
+      return;
+    }
+    if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
+    controlsTimerRef.current = setTimeout(() => setControlsVisible(false), 2500);
+    return () => {
+      if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
+    };
+  }, [isPlaying, controlsVisible]);
+
   // Infinite Carousel Logic
   useEffect(() => {
     const carousel = carouselRef.current;
