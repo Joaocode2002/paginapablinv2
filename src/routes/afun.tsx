@@ -22,8 +22,12 @@ function Afun() {
   const [unlocked, setUnlocked] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && localStorage.getItem("afun_registered") === "1") {
+    if (typeof window === "undefined") return;
+    const ts = Number(localStorage.getItem("afun_registered_at") || 0);
+    if (ts && Date.now() - ts < 24 * 60 * 60 * 1000) {
       setUnlocked(true);
+    } else if (ts) {
+      localStorage.removeItem("afun_registered_at");
     }
   }, []);
 
