@@ -47,8 +47,6 @@ function Afun() {
 
   const handleAfunClick = (e: React.MouseEvent) => {
     setLoadingAfun(true);
-    try { localStorage.setItem("afun_registered_at", String(Date.now())); } catch {}
-    setUnlocked(true);
 
     const fbq = (window as any).fbq;
     if (typeof fbq === "function") {
@@ -58,6 +56,11 @@ function Afun() {
       setLoadingAfun(false);
       window.open("https://afun.bet.br/?ch=1330001&ic=5700043", "_blank", "noopener,noreferrer");
     }, 800);
+
+    setTimeout(() => {
+      try { localStorage.setItem("afun_registered_at", String(Date.now())); } catch {}
+      setUnlocked(true);
+    }, 10000);
   };
 
   const handleWppClick = (e: React.MouseEvent) => {
