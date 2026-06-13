@@ -67,8 +67,7 @@ function Afun() {
 
     setTimeout(() => {
       setLoadingWpp(false);
-      const message = encodeURIComponent("Acabei de me cadastrar como faço para resgatar minha banca!");
-      window.location.href = `https://wa.me/5531992971774?text=${message}`;
+      window.location.href = "https://t.me/banquinhasgratis";
     }, 800);
   };
 
