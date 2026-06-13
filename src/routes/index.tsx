@@ -246,7 +246,7 @@ function Index() {
               </video>
 
               {/* Video Controls Overlay */}
-              <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:p-6">
+              <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-100 transition-opacity duration-300 md:p-6">
                 <input 
                   type="range" 
                   min="0" 
