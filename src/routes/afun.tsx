@@ -52,7 +52,7 @@ function Afun() {
     }
     setTimeout(() => {
       setLoadingAfun(false);
-      window.location.href = "https://afun.bet.br/?ch=1330001&ic=5700043";
+      window.open("https://afun.bet.br/?ch=1330001&ic=5700043", "_blank", "noopener,noreferrer");
     }, 800);
   };
 
