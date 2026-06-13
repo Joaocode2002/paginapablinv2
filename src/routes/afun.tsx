@@ -42,8 +42,9 @@ function Afun() {
   }, []);
 
   const handleAfunClick = (e: React.MouseEvent) => {
-    e.preventDefault();
     setLoadingAfun(true);
+    try { localStorage.setItem("afun_registered", "1"); } catch {}
+    setUnlocked(true);
 
     const fbq = (window as any).fbq;
     if (typeof fbq === "function") {
