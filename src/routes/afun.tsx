@@ -44,7 +44,7 @@ function Afun() {
     }
     setTimeout(() => {
       setLoadingAfun(false);
-      window.location.href = "https://afun.bet.br/?ad_type=207&ch=1330001&ic=5700043&ad_extra=1781278812";
+      window.location.href = "https://afun.bet.br/?ch=1330001&ic=5700043";
     }, 800);
   };
 
