@@ -47,7 +47,7 @@ function Afun() {
 
   const handleAfunClick = (e: React.MouseEvent) => {
     setLoadingAfun(true);
-    try { localStorage.setItem("afun_registered", "1"); } catch {}
+    try { localStorage.setItem("afun_registered_at", String(Date.now())); } catch {}
     setUnlocked(true);
 
     const fbq = (window as any).fbq;
