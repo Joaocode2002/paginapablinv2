@@ -13,8 +13,16 @@ function Index() {
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
   const [volume, setVolume] = useState(0);
+  const [controlsVisible, setControlsVisible] = useState(true);
+  const controlsTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+
+  const showControls = () => {
+    setControlsVisible(true);
+    if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
+    controlsTimerRef.current = setTimeout(() => setControlsVisible(false), 2500);
+  };
 
   useEffect(() => {
     const fbq = (window as any).fbq;
@@ -231,7 +239,12 @@ function Index() {
               Delay Esportivo
             </h2>
             
-            <div className="group relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
+            <div
+              className="group relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl"
+              onMouseMove={showControls}
+              onTouchStart={showControls}
+              onClick={showControls}
+            >
               <video 
                 ref={videoRef}
                 className="h-full w-full object-cover"
@@ -246,7 +259,7 @@ function Index() {
               </video>
 
               {/* Video Controls Overlay */}
-              <div className="absolute inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-100 transition-opacity duration-300 md:p-6">
+              <div className={`absolute inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-gradient-to-t from-black/90 to-transparent p-4 transition-opacity duration-300 md:p-6 ${controlsVisible || !isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
                 <input 
                   type="range" 
                   min="0" 
