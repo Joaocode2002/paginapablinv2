@@ -71,7 +71,7 @@ function Afun() {
 
     setTimeout(() => {
       setLoadingWpp(false);
-      window.location.href = "https://t.me/banquinhasgratis";
+      window.location.href = "https://t.me/bancasgratuitasbot";
     }, 800);
   };
 
