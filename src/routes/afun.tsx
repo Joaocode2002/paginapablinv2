@@ -19,6 +19,13 @@ function Afun() {
   const [loadingAfun, setLoadingAfun] = useState(false);
   const [loadingWpp, setLoadingWpp] = useState(false);
   const [showLockedMsg, setShowLockedMsg] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && localStorage.getItem("afun_registered") === "1") {
+      setUnlocked(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (!showLockedMsg) return;
