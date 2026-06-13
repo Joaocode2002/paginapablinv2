@@ -290,6 +290,19 @@ function Index() {
                   </div>
                 </button>
               )}
+
+              {/* Play overlay quando pausado (após iniciar) */}
+              {videoStarted && !isPlaying && (
+                <button
+                  onClick={togglePlay}
+                  className="absolute inset-0 z-20 flex items-center justify-center bg-black/30"
+                  aria-label="Reproduzir"
+                >
+                  <div className="flex items-center justify-center rounded-full bg-brand-green/90 p-6 text-black shadow-lg transition-transform hover:scale-110">
+                    <Play className="h-10 w-10 fill-current" />
+                  </div>
+                </button>
+              )}
             </div>
           </section>
 
