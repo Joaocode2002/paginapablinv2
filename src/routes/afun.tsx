@@ -101,7 +101,7 @@ function Afun() {
             </p>
             
             <p className="max-w-xl mx-auto font-montserrat text-lg text-white/80">
-              Após realizar o cadastro na plataforma e fazer toda a verificação, volte nesta página que o botão do WhatsApp estará ativo!
+              Após realizar o cadastro na plataforma e fazer toda a verificação, volte nesta página que o botão de contato estará ativo!
             </p>
           </div>
 
