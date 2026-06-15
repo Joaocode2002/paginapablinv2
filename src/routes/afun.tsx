@@ -54,7 +54,7 @@ function Afun() {
     }
     setTimeout(() => {
       setLoadingAfun(false);
-      window.open("https://afun.bet.br/?ch=1330001&ic=5700043", "_blank", "noopener,noreferrer");
+      window.open("https://afun.bet.br/?ad_type=207&ch=1330001&ic=5700043&ad_extra=1781509351", "_blank", "noopener,noreferrer");
     }, 800);
 
     setTimeout(() => {
