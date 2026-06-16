@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { AlertTriangle, ArrowRight, Lock } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
@@ -16,26 +16,7 @@ export const Route = createFileRoute("/afun")({
 });
 
 function Afun() {
-  const [loadingAfun, setLoadingAfun] = useState(false);
   const [loadingWpp, setLoadingWpp] = useState(false);
-  const [showLockedMsg, setShowLockedMsg] = useState(false);
-  const [unlocked, setUnlocked] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const ts = Number(localStorage.getItem("afun_registered_at") || 0);
-    if (ts && Date.now() - ts < 24 * 60 * 60 * 1000) {
-      setUnlocked(true);
-    } else if (ts) {
-      localStorage.removeItem("afun_registered_at");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!showLockedMsg) return;
-    const t = setTimeout(() => setShowLockedMsg(false), 4000);
-    return () => clearTimeout(t);
-  }, [showLockedMsg]);
 
   useEffect(() => {
     const fbq = (window as any).fbq;
@@ -44,24 +25,6 @@ function Afun() {
       fbq("trackSingle", AFUN_PIXEL_ID, "PageView");
     }
   }, []);
-
-  const handleAfunClick = (e: React.MouseEvent) => {
-    setLoadingAfun(true);
-
-    const fbq = (window as any).fbq;
-    if (typeof fbq === "function") {
-      fbq("trackSingle", AFUN_PIXEL_ID, "Lead");
-    }
-    setTimeout(() => {
-      setLoadingAfun(false);
-      window.open("https://afun.bet.br/?ad_type=207&ch=1330001&ic=6389663&ad_extra=1781620757", "_blank", "noopener,noreferrer");
-    }, 800);
-
-    setTimeout(() => {
-      try { localStorage.setItem("afun_registered_at", String(Date.now())); } catch {}
-      setUnlocked(true);
-    }, 5000);
-  };
 
   const handleWppClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -113,62 +76,22 @@ function Afun() {
           </div>
 
           <div className="flex flex-col w-full max-w-md gap-4">
-            {/* Botão Afun */}
-            <button 
-              onClick={handleAfunClick}
-              className="group relative inline-flex min-h-16 w-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl p-[2px] transition-all active:scale-[0.98] shadow-lg"
+            <button
+              onClick={handleWppClick}
+              className="group relative inline-flex min-h-16 w-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl p-[2px] transition-all active:scale-[0.98] shadow-[0_0_20px_rgba(34,197,94,0.3)]"
             >
-              <span className="absolute inset-[-200%] animate-border-rotate bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,var(--color-brand-green)_5%,transparent_10%,transparent_50%,var(--color-brand-green)_55%,transparent_60%)]" />
-              <span className="relative z-10 flex h-full w-full items-center justify-center gap-3 rounded-2xl bg-zinc-900 px-8 py-4 font-outfit text-xl font-bold text-white border border-white/10 hover:bg-zinc-800 transition-colors">
-                {loadingAfun ? (
+              <span className="absolute inset-[-200%] animate-border-rotate bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22c55e_5%,transparent_10%,transparent_50%,#22c55e_55%,transparent_60%)]" />
+              <span className="relative z-10 flex h-full w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-b from-[#00a300] to-[#006400] px-8 py-4 font-outfit text-xl font-bold text-white shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-2px_4px_rgba(0,0,0,0.3)]">
+                {loadingWpp ? (
                   <div className="h-6 w-6 animate-spin rounded-full border-2 border-white border-t-transparent" />
                 ) : (
                   <>
-                    Cadastrar na plataforma
-                    <ArrowRight className="h-5 w-5 text-brand-green" />
+                    <WhatsAppIcon className="h-6 w-6" />
+                    Receber banca
                   </>
                 )}
               </span>
             </button>
-
-            {unlocked ? (
-              <button
-                onClick={handleWppClick}
-                className="group relative inline-flex min-h-16 w-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl p-[2px] transition-all active:scale-[0.98] shadow-[0_0_20px_rgba(34,197,94,0.3)]"
-              >
-                <span className="absolute inset-[-200%] animate-border-rotate bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#22c55e_5%,transparent_10%,transparent_50%,#22c55e_55%,transparent_60%)]" />
-                <span className="relative z-10 flex h-full w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-b from-[#00a300] to-[#006400] px-8 py-4 font-outfit text-xl font-bold text-white shadow-[inset_0_2px_4px_rgba(255,255,255,0.3),inset_0_-2px_4px_rgba(0,0,0,0.3)]">
-                  {loadingWpp ? (
-                    <div className="h-6 w-6 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                  ) : (
-                    <>
-                      <WhatsAppIcon className="h-6 w-6" />
-                      Receber banca
-                    </>
-                  )}
-                </span>
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setShowLockedMsg(true)}
-                aria-disabled="true"
-                className="relative inline-flex min-h-16 w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-b from-[#00a300]/60 to-[#006400]/60 px-8 py-4 font-outfit text-xl font-bold text-white/80 border border-white/10 shadow-[inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-2px_4px_rgba(0,0,0,0.3)] cursor-not-allowed grayscale-[0.3]"
-              >
-                <WhatsAppIcon className="h-6 w-6 opacity-70" />
-                Receber banca
-                <Lock className="h-5 w-5 text-yellow-300" />
-              </button>
-            )}
-
-            {showLockedMsg && !unlocked && (
-              <div
-                role="alert"
-                className="rounded-xl border border-yellow-400/40 bg-yellow-400/10 px-4 py-3 text-sm font-medium text-yellow-200 text-center animate-in fade-in"
-              >
-                Cadastre-se na plataforma e complete a verificação para liberar sua banca.
-              </div>
-            )}
           </div>
         </div>
       </main>
