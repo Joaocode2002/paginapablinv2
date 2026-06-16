@@ -16,26 +16,7 @@ export const Route = createFileRoute("/afun")({
 });
 
 function Afun() {
-  const [loadingAfun, setLoadingAfun] = useState(false);
   const [loadingWpp, setLoadingWpp] = useState(false);
-  const [showLockedMsg, setShowLockedMsg] = useState(false);
-  const [unlocked, setUnlocked] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const ts = Number(localStorage.getItem("afun_registered_at") || 0);
-    if (ts && Date.now() - ts < 24 * 60 * 60 * 1000) {
-      setUnlocked(true);
-    } else if (ts) {
-      localStorage.removeItem("afun_registered_at");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!showLockedMsg) return;
-    const t = setTimeout(() => setShowLockedMsg(false), 4000);
-    return () => clearTimeout(t);
-  }, [showLockedMsg]);
 
   useEffect(() => {
     const fbq = (window as any).fbq;
@@ -44,24 +25,6 @@ function Afun() {
       fbq("trackSingle", AFUN_PIXEL_ID, "PageView");
     }
   }, []);
-
-  const handleAfunClick = (e: React.MouseEvent) => {
-    setLoadingAfun(true);
-
-    const fbq = (window as any).fbq;
-    if (typeof fbq === "function") {
-      fbq("trackSingle", AFUN_PIXEL_ID, "Lead");
-    }
-    setTimeout(() => {
-      setLoadingAfun(false);
-      window.open("https://afun.bet.br/?ad_type=207&ch=1330001&ic=6389663&ad_extra=1781620757", "_blank", "noopener,noreferrer");
-    }, 800);
-
-    setTimeout(() => {
-      try { localStorage.setItem("afun_registered_at", String(Date.now())); } catch {}
-      setUnlocked(true);
-    }, 5000);
-  };
 
   const handleWppClick = (e: React.MouseEvent) => {
     e.preventDefault();
