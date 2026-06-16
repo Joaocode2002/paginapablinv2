@@ -83,7 +83,7 @@ function Afun() {
                   <div className="h-6 w-6 animate-spin rounded-full border-2 border-white border-t-transparent" />
                 ) : (
                   <>
-                    <WhatsAppIcon className="h-6 w-6" />
+                    <TelegramIcon className="h-6 w-6" />
                     Receber banca
                   </>
                 )}
