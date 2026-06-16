@@ -70,9 +70,6 @@ function Afun() {
               Para receber a banca, preciso que você <strong className="text-brand-green">crie a conta</strong> na plataforma abaixo e <strong className="text-brand-green">verifique sua conta</strong>.
             </p>
             
-            <p className="max-w-xl mx-auto font-montserrat text-lg text-white/80">
-              Após realizar o cadastro na plataforma e fazer toda a verificação, volte nesta página que o botão de contato estará ativo!
-            </p>
           </div>
 
           <div className="flex flex-col w-full max-w-md gap-4">
