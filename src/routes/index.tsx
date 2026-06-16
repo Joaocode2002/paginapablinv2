@@ -32,7 +32,7 @@ function Index() {
     }
   }, []);
 
-  const WHATSAPP_LINK = "https://chat.whatsapp.com/G9cvZl5llb36eMDeAjelwh?mode=gi_t";
+  const WHATSAPP_LINK = "https://chat.whatsapp.com/GFm0kbjwEaO63QWIx6TlV9";
 
   const handleWppClick = (e: React.MouseEvent) => {
     e.preventDefault();
