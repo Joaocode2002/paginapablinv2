@@ -60,7 +60,7 @@ function Afun() {
     setTimeout(() => {
       try { localStorage.setItem("afun_registered_at", String(Date.now())); } catch {}
       setUnlocked(true);
-    }, 10000);
+    }, 5000);
   };
 
   const handleWppClick = (e: React.MouseEvent) => {
