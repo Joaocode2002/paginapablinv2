@@ -254,7 +254,7 @@ function Mentoria() {
           <section className="mt-8 w-full flex flex-col gap-10 max-w-4xl mx-auto">
             {[
               { n: 2, title: "Como funciona a plataforma", src: "/mentoria2.mp4" },
-              { n: 3, title: "Como funciona a operação", src: "https://res.cloudinary.com/dvqmvjjd4/video/upload/mentoria3_kbpemr.mp4" },
+              { n: 3, title: "Como funciona a operação", src: "https://archive.org/download/como-funicona-operacao-pc-3/como%20funicona%20opera%C3%A7%C3%A3o%20pc%203.mp4" },
               { n: 4, title: "Como acessar pelo telefone", src: "https://archive.org/download/cellmentoria/cellmentoria.mp4" },
             ].map(({ n, title, src }) => (
               <div key={n} className="w-full text-center">
